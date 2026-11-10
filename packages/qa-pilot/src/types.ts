@@ -17,7 +17,7 @@ export type ActionType = (typeof ACTION_TYPES)[number];
 /** What the model asked for. Elements are referenced by snapshot ref (e.g. "e12"). */
 export type ProposedAction =
   | { type: "click"; ref: string }
-  | { type: "type"; ref: string; text: string; unique?: boolean }
+  | { type: "type"; ref: string; text: string }
   | { type: "select"; ref: string; option: string }
   | { type: "navigate"; url: string }
   | { type: "assert"; kind: "text_visible"; text: string }
@@ -29,7 +29,7 @@ export type ProposedAction =
 /** What actually ran, with refs replaced by locators. This is what export replays. */
 export type ExecutedAction =
   | { type: "click"; locator: LocatorSpec }
-  | { type: "type"; locator: LocatorSpec; text: string; unique?: boolean }
+  | { type: "type"; locator: LocatorSpec; text: string }
   | { type: "select"; locator: LocatorSpec; option: string }
   | { type: "navigate"; url: string }
   | { type: "assert"; kind: "text_visible"; text: string; locator: LocatorSpec }
@@ -130,6 +130,8 @@ export interface RunRecord {
   name: string;
   instruction: string;
   startUrl: string;
+  /** Random token the model puts in values that must be new on every run (emails, usernames). */
+  runToken: string;
   provider: string;
   model: string;
   startedAt: string;
