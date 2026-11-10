@@ -37,3 +37,9 @@ npm-debug.log*
 *.tfstate.*
 *.tfvars
 !*.tfvars.example
+
+# qa-pilot output
+qa-pilot-runs/
+test-results/
+playwright-report/
+blob-report/

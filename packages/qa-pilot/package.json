@@ -1,0 +1,59 @@
+{
+  "name": "qa-pilot",
+  "version": "0.1.0",
+  "description": "An AI agent that tests web apps from plain-English instructions, then exports the flow as a deterministic Playwright test.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "bin": {
+    "qa-pilot": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e",
+    "llm",
+    "agent",
+    "accessibility"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GillParm/qa-pilot.git",
+    "directory": "packages/qa-pilot"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --project unit",
+    "test:integration": "vitest run --project integration",
+    "test:all": "vitest run"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0",
+    "@google/genai": "^3.1.0",
+    "commander": "^15.1.0",
+    "diff": "^9.0.0",
+    "playwright": "^1.65.0",
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^24.19.2",
+    "vitest": "^5.1.0"
+  }
+}

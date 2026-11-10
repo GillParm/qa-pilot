@@ -8,8 +8,7 @@
     "node": ">=24"
   },
   "workspaces": [
-    "packages/qa-pilot",
-    "demo-shop"
+    "packages/qa-pilot"
   ],
   "scripts": {
     "build": "npm run build -w qa-pilot",
@@ -18,5 +17,13 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "npm run test -w qa-pilot"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.9.10",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.2"
   }
 }
