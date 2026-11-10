@@ -1,0 +1,22 @@
+{
+  "name": "qa-pilot-monorepo",
+  "private": true,
+  "type": "module",
+  "description": "qa-pilot: an AI agent that tests web apps from plain-English instructions, plus a buggy demo shop to try it on.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "workspaces": [
+    "packages/qa-pilot",
+    "demo-shop"
+  ],
+  "scripts": {
+    "build": "npm run build -w qa-pilot",
+    "typecheck": "npm run typecheck -w qa-pilot",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run test -w qa-pilot"
+  }
+}
