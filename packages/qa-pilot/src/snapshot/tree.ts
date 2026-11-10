@@ -76,7 +76,9 @@ export function truncate(value: string, max: number): string {
 }
 
 export function isAriaNode(value: unknown): value is AriaNode {
-  return typeof value === "object" && value !== null && typeof (value as AriaNode).role === "string";
+  return (
+    typeof value === "object" && value !== null && typeof (value as AriaNode).role === "string"
+  );
 }
 
 /** Validates the untyped JSON Playwright returns and normalises it to a child list. */
@@ -138,7 +140,9 @@ function trimChildren(children: AriaChild[], opts: TrimOptions, parentRole?: str
     if (options.length > opts.maxOptions) {
       const kept = new Set(options.slice(0, opts.maxOptions));
       const rest = options.length - opts.maxOptions;
-      const filtered = out.filter((c) => typeof c === "string" || c.role !== "option" || kept.has(c));
+      const filtered = out.filter(
+        (c) => typeof c === "string" || c.role !== "option" || kept.has(c),
+      );
       filtered.push(`… ${rest} more options`);
       return filtered;
     }
@@ -170,7 +174,8 @@ function describeLine(node: AriaNode): string {
   if (node.ref) parts.push(`[ref=${node.ref}]`);
   if (node.url) parts.push(`url=${node.url}`);
   if (node.placeholder) parts.push(`placeholder=${quote(node.placeholder)}`);
-  if (node.text !== undefined && VALUE_ROLES.has(node.role)) parts.push(`value=${quote(node.text)}`);
+  if (node.text !== undefined && VALUE_ROLES.has(node.role))
+    parts.push(`value=${quote(node.text)}`);
   return parts.join(" ");
 }
 

@@ -35,10 +35,17 @@ export function toLLMError(err: unknown): LLMError {
     return new LLMError("Anthropic request timed out", { retryable: true, cause: err });
   }
   if (err instanceof Anthropic.APIConnectionError) {
-    return new LLMError(`could not reach Anthropic: ${err.message}`, { retryable: true, cause: err });
+    return new LLMError(`could not reach Anthropic: ${err.message}`, {
+      retryable: true,
+      cause: err,
+    });
   }
   if (err instanceof Anthropic.AuthenticationError) {
-    return new LLMError("Anthropic rejected the API key (401)", { retryable: false, status: 401, cause: err });
+    return new LLMError("Anthropic rejected the API key (401)", {
+      retryable: false,
+      status: 401,
+      cause: err,
+    });
   }
   if (err instanceof Anthropic.RateLimitError) {
     const after = retryAfterMs(err.headers);
@@ -62,7 +69,10 @@ export function toLLMError(err: unknown): LLMError {
   if (err instanceof Error && err.name === "AbortError") {
     return new LLMError("request aborted", { retryable: false, cause: err });
   }
-  return new LLMError(err instanceof Error ? err.message : String(err), { retryable: false, cause: err });
+  return new LLMError(err instanceof Error ? err.message : String(err), {
+    retryable: false,
+    cause: err,
+  });
 }
 
 /**
@@ -135,7 +145,8 @@ export class AnthropicProvider implements LLMProvider {
     let toolCall: ToolCallResponse["toolCall"];
     const texts: string[] = [];
     for (const block of response.content) {
-      if (block.type === "tool_use" && !toolCall) toolCall = { name: block.name, input: block.input };
+      if (block.type === "tool_use" && !toolCall)
+        toolCall = { name: block.name, input: block.input };
       else if (block.type === "text") texts.push(block.text);
     }
     if (toolCall && response.stop_reason === "max_tokens") {

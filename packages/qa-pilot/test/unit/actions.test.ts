@@ -37,9 +37,9 @@ describe("parseToolCall", () => {
   });
 
   it("parses each assert kind and checks its required field", () => {
-    expect(parseToolCall("assert", { ...base, kind: "url_matches", pattern: "/cart" }).action).toEqual(
-      { type: "assert", kind: "url_matches", pattern: "/cart" },
-    );
+    expect(
+      parseToolCall("assert", { ...base, kind: "url_matches", pattern: "/cart" }).action,
+    ).toEqual({ type: "assert", kind: "url_matches", pattern: "/cart" });
     expect(() => parseToolCall("assert", { ...base, kind: "input_value", ref: "e1" })).toThrow(
       /needs "value"/,
     );
@@ -65,7 +65,9 @@ describe("parseUrlPattern and resolveUrl", () => {
   });
 
   it("resolves relative URLs against the current page", () => {
-    expect(resolveUrl("/cart", "http://localhost:3200/products/1")).toBe("http://localhost:3200/cart");
+    expect(resolveUrl("/cart", "http://localhost:3200/products/1")).toBe(
+      "http://localhost:3200/cart",
+    );
     expect(resolveUrl("https://a.test/x", "about:blank")).toBe("https://a.test/x");
   });
 });
@@ -92,7 +94,10 @@ describe("executeProposed", () => {
 
   async function ref(match: RegExp) {
     const snapshot = await captureSnapshot(page);
-    const r = snapshot.text.split("\n").find((l) => match.test(l))?.match(/\[ref=(\w+)\]/)?.[1];
+    const r = snapshot.text
+      .split("\n")
+      .find((l) => match.test(l))
+      ?.match(/\[ref=(\w+)\]/)?.[1];
     if (!r) throw new Error(snapshot.text);
     return { snapshot, ref: r };
   }
@@ -100,7 +105,12 @@ describe("executeProposed", () => {
   it("types, selects, clicks and records the locators it used", async () => {
     await page.setContent(html);
     let s = await ref(/textbox "Email"/);
-    const typed = await executeProposed(page, { type: "type", ref: s.ref, text: "ada@example.com" }, s.snapshot, opts);
+    const typed = await executeProposed(
+      page,
+      { type: "type", ref: s.ref, text: "ada@example.com" },
+      s.snapshot,
+      opts,
+    );
     expect(typed.outcome).toBe("ok");
     expect(typed.action).toEqual({
       type: "type",
@@ -109,7 +119,12 @@ describe("executeProposed", () => {
     });
 
     s = await ref(/combobox "Quantity"/);
-    const selected = await executeProposed(page, { type: "select", ref: s.ref, option: "Three" }, s.snapshot, opts);
+    const selected = await executeProposed(
+      page,
+      { type: "select", ref: s.ref, option: "Three" },
+      s.snapshot,
+      opts,
+    );
     expect(selected.outcome).toBe("ok");
 
     s = await ref(/button "Save"/);

@@ -24,7 +24,7 @@ describe("trimTree", () => {
   });
 
   it("keeps clickable generic elements and marks them", () => {
-    expect(text).toContain('- generic [clickable] [ref=');
+    expect(text).toContain("- generic [clickable] [ref=");
     expect(text).toContain(": Clickable div");
   });
 

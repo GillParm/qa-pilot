@@ -2,7 +2,13 @@ import type { Locator, Page } from "playwright";
 import { RefError, resolveRef } from "../locator/resolve.js";
 import { describeLocator, toLocator } from "../locator/spec.js";
 import type { PageSnapshot } from "../snapshot/capture.js";
-import type { ElementInfo, ExecutedAction, LocatorSpec, ProposedAction, StepOutcome } from "../types.js";
+import type {
+  ElementInfo,
+  ExecutedAction,
+  LocatorSpec,
+  ProposedAction,
+  StepOutcome,
+} from "../types.js";
 
 export interface ExecuteOptions {
   actionTimeoutMs: number;
@@ -81,13 +87,17 @@ async function poll(timeoutMs: number, check: () => Promise<boolean>): Promise<b
 }
 
 /** Current value of an input, plus the selected label for a <select>. */
-async function readValues(locator: Locator, timeoutMs: number): Promise<{ value: string; label?: string }> {
+async function readValues(
+  locator: Locator,
+  timeoutMs: number,
+): Promise<{ value: string; label?: string }> {
   return locator.evaluate(
     (el) => {
       if (el instanceof HTMLSelectElement) {
         return { value: el.value, label: el.selectedOptions[0]?.label ?? "" };
       }
-      if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) return { value: el.value };
+      if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)
+        return { value: el.value };
       return { value: el.textContent ?? "" };
     },
     undefined,
@@ -108,7 +118,9 @@ export async function performAction(
   try {
     switch (action.type) {
       case "click":
-        await withRetries(opts.actionRetries, () => toLocator(page, action.locator).click({ timeout }));
+        await withRetries(opts.actionRetries, () =>
+          toLocator(page, action.locator).click({ timeout }),
+        );
         await settle(page);
         return { outcome: "ok", action };
       case "type":
@@ -256,7 +268,11 @@ export async function executeProposed(
             };
             break;
           case "element_visible":
-            action = { type: "assert", kind: "element_visible", locator: await resolve(proposed.ref) };
+            action = {
+              type: "assert",
+              kind: "element_visible",
+              locator: await resolve(proposed.ref),
+            };
             break;
           case "url_matches":
             action = { type: "assert", kind: "url_matches", pattern: proposed.pattern };

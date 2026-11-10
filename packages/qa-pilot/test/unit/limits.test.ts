@@ -46,7 +46,9 @@ describe("Budget", () => {
     budget.charge("claude-opus-5-5", "claude-opus-5-5", usage(5_000, 0));
     expect(budget.stopReasonBeforeCall()).toBeUndefined();
     budget.charge("claude-opus-5-5", "claude-opus-5-5", usage(5_000, 0));
-    expect(budget.stopReasonBeforeCall()).toMatch(/cost limit reached \(\$0\.04 spent, limit \$0\.05\)/);
+    expect(budget.stopReasonBeforeCall()).toMatch(
+      /cost limit reached \(\$0\.04 spent, limit \$0\.05\)/,
+    );
   });
 
   it("stops when the run timeout passes", () => {
@@ -60,7 +62,9 @@ describe("Budget", () => {
 
   it("falls back to the requested model's price and flags unknown models", () => {
     const budget = new Budget(resolveLimits());
-    expect(budget.charge("claude-opus-5-5-variant", "claude-opus-5-5", usage(1_000_000, 0)).costUsd).toBeCloseTo(4);
+    expect(
+      budget.charge("claude-opus-5-5-variant", "claude-opus-5-5", usage(1_000_000, 0)).costUsd,
+    ).toBeCloseTo(4);
     const unknown = budget.charge("x", "y", usage(10, 10));
     expect(unknown).toEqual({ costUsd: 0, unpriced: true });
     expect([...budget.unpricedModels]).toEqual(["x"]);

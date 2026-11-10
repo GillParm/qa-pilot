@@ -72,11 +72,20 @@ describe("runAgent with the fake provider", () => {
     expect(shots).toContain("00-start.png");
     expect(shots).toContain("07.png");
     expect(record.console.some((c) => c.text.includes("cart widget warning"))).toBe(true);
-    expect(record.network.some((n) => n.url.endsWith("/api/missing") && n.status === 404)).toBe(true);
+    expect(record.network.some((n) => n.url.endsWith("/api/missing") && n.status === 404)).toBe(
+      true,
+    );
 
     // Each model request carried the system prompt, the tools and the current snapshot.
     const first = provider.requests[0]!;
-    expect(first.tools.map((t) => t.name)).toEqual(["click", "type", "select", "navigate", "assert", "done"]);
+    expect(first.tools.map((t) => t.name)).toEqual([
+      "click",
+      "type",
+      "select",
+      "navigate",
+      "assert",
+      "done",
+    ]);
     expect(first.messages[0]?.content).toContain("Run token: qatest1");
     expect(first.messages[0]?.content).toMatch(/button "Add to cart" \[ref=e\d+\]/);
     expect(provider.requests[3]?.messages[0]?.content).toContain("3. click link");
@@ -118,14 +127,20 @@ describe("runAgent with the fake provider", () => {
   });
 
   it("nudges the model when it answers without a tool call", async () => {
-    const provider = new FakeProvider([{ text: "Let me think." }, fake.assertText("Trail mug"), fake.done("pass", "ok")]);
+    const provider = new FakeProvider([
+      { text: "Let me think." },
+      fake.assertText("Trail mug"),
+      fake.done("pass", "ok"),
+    ]);
     const { record } = await run(provider);
     expect(record.verdict).toBe("pass");
     expect(provider.requests[1]?.messages[0]?.content).toContain("did not call a tool");
   });
 
   it("stops at the step limit", async () => {
-    const provider = new FakeProvider(Array.from({ length: 5 }, () => fake.assertText("Trail mug")));
+    const provider = new FakeProvider(
+      Array.from({ length: 5 }, () => fake.assertText("Trail mug")),
+    );
     const { record } = await run(provider, { limits: { maxSteps: 3, actionTimeoutMs: 1_500 } });
     expect(record.verdict).toBe("error");
     expect(record.stopReason).toBe("step limit reached (3 steps)");
@@ -169,7 +184,12 @@ describe("runAgent with the fake provider", () => {
 
   it("ends with an error when the provider gives up", async () => {
     const provider = new FakeProvider([
-      { error: new LLMError("the model declined the request (cyber)", { retryable: false, refusal: true }) },
+      {
+        error: new LLMError("the model declined the request (cyber)", {
+          retryable: false,
+          refusal: true,
+        }),
+      },
     ]);
     const { record } = await run(provider);
     expect(record.verdict).toBe("error");

@@ -12,7 +12,11 @@ function mockClient(response: unknown) {
   return { client: { beta: { messages: { create } } } as unknown as Anthropic, create };
 }
 
-const message = (content: unknown[], stop_reason = "tool_use", extra: Record<string, unknown> = {}) => ({
+const message = (
+  content: unknown[],
+  stop_reason = "tool_use",
+  extra: Record<string, unknown> = {},
+) => ({
   id: "msg_1",
   type: "message",
   role: "assistant",
@@ -20,7 +24,12 @@ const message = (content: unknown[], stop_reason = "tool_use", extra: Record<str
   content,
   stop_reason,
   stop_details: null,
-  usage: { input_tokens: 2000, output_tokens: 300, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 },
+  usage: {
+    input_tokens: 2000,
+    output_tokens: 300,
+    cache_read_input_tokens: 0,
+    cache_creation_input_tokens: 0,
+  },
   ...extra,
 });
 
@@ -33,7 +42,14 @@ describe("AnthropicProvider", () => {
 
   it("sends strict tools, auto tool choice, effort and default fallbacks", async () => {
     const { client, create } = mockClient(
-      message([{ type: "tool_use", id: "t1", name: "click", input: { ref: "e1", intent: "x", reasoning: "y" } }]),
+      message([
+        {
+          type: "tool_use",
+          id: "t1",
+          name: "click",
+          input: { ref: "e1", intent: "x", reasoning: "y" },
+        },
+      ]),
     );
     const provider = new AnthropicProvider({ client, effort: "low" });
     const res = await provider.call(request);
@@ -49,8 +65,16 @@ describe("AnthropicProvider", () => {
     const tools = params.tools as Array<Record<string, unknown>>;
     expect(tools.every((t) => t.strict === true)).toBe(true);
 
-    expect(res.toolCall).toEqual({ name: "click", input: { ref: "e1", intent: "x", reasoning: "y" } });
-    expect(res.usage).toEqual({ inputTokens: 2000, outputTokens: 300, cacheReadTokens: 0, cacheWriteTokens: 0 });
+    expect(res.toolCall).toEqual({
+      name: "click",
+      input: { ref: "e1", intent: "x", reasoning: "y" },
+    });
+    expect(res.usage).toEqual({
+      inputTokens: 2000,
+      outputTokens: 300,
+      cacheReadTokens: 0,
+      cacheWriteTokens: 0,
+    });
     expect(res.model).toBe("claude-opus-5-5");
   });
 
@@ -63,7 +87,9 @@ describe("AnthropicProvider", () => {
 
   it("turns a refusal into a non-retryable error", async () => {
     const { client } = mockClient(
-      message([], "refusal", { stop_details: { type: "refusal", category: "cyber", explanation: "" } }),
+      message([], "refusal", {
+        stop_details: { type: "refusal", category: "cyber", explanation: "" },
+      }),
     );
     const err = await new AnthropicProvider({ client }).call(request).catch((e: unknown) => e);
     expect(err).toBeInstanceOf(LLMError);
@@ -100,7 +126,12 @@ describe("FakeProvider", () => {
       { role: "textbox", name: "Email", ref: "e9" },
     ]),
   } satisfies PageSnapshot;
-  const req = { system: "", messages: [], tools: ACTION_TOOLS, context: { purpose: "step" as const, snapshot } };
+  const req = {
+    system: "",
+    messages: [],
+    tools: ACTION_TOOLS,
+    context: { purpose: "step" as const, snapshot },
+  };
 
   it("resolves role and name targets to snapshot refs", async () => {
     const provider = new FakeProvider([

@@ -69,7 +69,12 @@ describe("resolveRef", () => {
     await page.setContent(`<button>Add to cart</button><button>Add to cart and pay</button>`);
     const { snapshot, ref } = await refFor((l) => l.includes('"Add to cart"'));
     const target = await resolveRef(page, ref, snapshot);
-    expect(target.locator).toEqual({ kind: "role", role: "button", name: "Add to cart", exact: true });
+    expect(target.locator).toEqual({
+      kind: "role",
+      role: "button",
+      name: "Add to cart",
+      exact: true,
+    });
   });
 
   it("adds nth when several elements share a role and name", async () => {
@@ -77,7 +82,9 @@ describe("resolveRef", () => {
       `<ul><li>Mug <button>Add to cart</button></li><li>Tote <button>Add to cart</button></li></ul>`,
     );
     const snapshot = await captureSnapshot(page);
-    const refs = [...snapshot.text.matchAll(/button "Add to cart" \[ref=(\w+)\]/g)].map((m) => m[1]!);
+    const refs = [...snapshot.text.matchAll(/button "Add to cart" \[ref=(\w+)\]/g)].map(
+      (m) => m[1]!,
+    );
     expect(refs).toHaveLength(2);
     const second = await resolveRef(page, refs[1]!, snapshot);
     expect(second.locator).toEqual({
@@ -96,7 +103,12 @@ describe("resolveRef", () => {
     await page.setContent(`<h2><a href="#mug">Trail mug</a></h2>`);
     const { snapshot, ref } = await refFor((l) => l.includes("heading"));
     const target = await resolveRef(page, ref, snapshot);
-    expect(target.locator).toEqual({ kind: "role", role: "heading", name: "Trail mug", exact: true });
+    expect(target.locator).toEqual({
+      kind: "role",
+      role: "heading",
+      name: "Trail mug",
+      exact: true,
+    });
   });
 
   it("rejects refs that are not in the snapshot", async () => {

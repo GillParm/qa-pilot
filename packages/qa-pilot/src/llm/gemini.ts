@@ -42,7 +42,10 @@ export function toGeminiError(err: unknown): LLMError {
   if (err instanceof TypeError) {
     return new LLMError(`could not reach Gemini: ${err.message}`, { retryable: true, cause: err });
   }
-  return new LLMError(err instanceof Error ? err.message : String(err), { retryable: false, cause: err });
+  return new LLMError(err instanceof Error ? err.message : String(err), {
+    retryable: false,
+    cause: err,
+  });
 }
 
 /**

@@ -7,15 +7,14 @@ import { ACTION_TOOLS, parseToolCall, ToolInputError } from "../actions/tools.js
 import { EvidenceRecorder } from "../evidence/recorder.js";
 import type { ModelPrice } from "../llm/pricing.js";
 import { withRetries } from "../llm/retry.js";
-import { LLMError, type ChatMessage, type LLMProvider, type ToolCallResponse } from "../llm/types.js";
+import {
+  LLMError,
+  type ChatMessage,
+  type LLMProvider,
+  type ToolCallResponse,
+} from "../llm/types.js";
 import { captureSnapshot, type PageSnapshot } from "../snapshot/capture.js";
-import type {
-  LlmCallRecord,
-  RunLimits,
-  RunRecord,
-  StepRecord,
-  Verdict,
-} from "../types.js";
+import type { LlmCallRecord, RunLimits, RunRecord, StepRecord, Verdict } from "../types.js";
 import { playwrightVersion, VERSION } from "../version.js";
 import { Budget, resolveLimits } from "./limits.js";
 import {
@@ -82,12 +81,16 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
   const runToken = opts.runToken ?? newRunToken();
   const viewport = opts.viewport ?? DEFAULT_VIEWPORT;
   const headless = opts.headless ?? true;
-  const recorder = await EvidenceRecorder.create(opts.outputDir ?? "qa-pilot-runs", name, startedAt);
+  const recorder = await EvidenceRecorder.create(
+    opts.outputDir ?? "qa-pilot-runs",
+    name,
+    startedAt,
+  );
   opts.onStart?.(recorder.runDir);
 
   const steps: StepRecord[] = [];
   let verdict: Verdict = "error";
-  let summary = "";
+  let summary: string;
   let stopReason: string | undefined;
   let video: string | undefined;
 
@@ -113,7 +116,10 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
     page = await context.newPage();
     recorder.attach(page);
 
-    await page.goto(opts.url, { waitUntil: "load", timeout: Math.max(limits.actionTimeoutMs, 30_000) });
+    await page.goto(opts.url, {
+      waitUntil: "load",
+      timeout: Math.max(limits.actionTimeoutMs, 30_000),
+    });
     await settle(page);
     await recorder.screenshot(page, "00-start");
 
@@ -135,18 +141,24 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
       const snapshot = await captureSnapshot(page, { timeoutMs: limits.actionTimeoutMs });
       const evidence = recorder.drain();
 
-      const decision = await decide(opts.provider, budget, {
-        instruction: opts.instruction,
-        startUrl: opts.url,
-        runToken,
-        stepNumber: index,
-        maxSteps: limits.maxSteps,
-        history: steps,
-        snapshot,
-        console: evidence.console,
-        network: evidence.network,
-        ...(feedback ? { feedback } : {}),
-      }, limits, abort.signal);
+      const decision = await decide(
+        opts.provider,
+        budget,
+        {
+          instruction: opts.instruction,
+          startUrl: opts.url,
+          runToken,
+          stepNumber: index,
+          maxSteps: limits.maxSteps,
+          history: steps,
+          snapshot,
+          console: evidence.console,
+          network: evidence.network,
+          ...(feedback ? { feedback } : {}),
+        },
+        limits,
+        abort.signal,
+      );
       feedback = undefined;
       budget.countStep();
 
@@ -243,7 +255,11 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
       const screenshot = await recorder.screenshot(page, String(index).padStart(2, "0"));
       const late = recorder.drain();
       const step = finishStep(
-        { ...base, console: [...base.console, ...late.console], network: [...base.network, ...late.network] },
+        {
+          ...base,
+          console: [...base.console, ...late.console],
+          network: [...base.network, ...late.network],
+        },
         {
           intent,
           reasoning,
@@ -288,7 +304,10 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
     summary = `Run error: ${stopReason}`;
   } finally {
     clearTimeout(runTimer);
-    const videoPath = await page?.video()?.path().catch(() => undefined);
+    const videoPath = await page
+      ?.video()
+      ?.path()
+      .catch(() => undefined);
     await context?.close().catch(() => {});
     if (ownsBrowser) await browser?.close().catch(() => {});
     video = await recorder.saveVideo(videoPath);
@@ -337,7 +356,10 @@ function finishStep(
   base: Pick<StepRecord, "index" | "urlBefore" | "startedAt" | "console" | "network"> & {
     llm?: LlmCallRecord;
   },
-  rest: Omit<StepRecord, "index" | "urlBefore" | "startedAt" | "console" | "network" | "llm" | "durationMs"> & {
+  rest: Omit<
+    StepRecord,
+    "index" | "urlBefore" | "startedAt" | "console" | "network" | "llm" | "durationMs"
+  > & {
     stepStarted: number;
   },
 ): StepRecord {

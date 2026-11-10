@@ -116,7 +116,9 @@ export function renderStepPrompt(input: StepPromptInput): string {
     lines.push("");
   }
 
-  lines.push(`Current page: ${input.snapshot.title ? `${JSON.stringify(input.snapshot.title)} ` : ""}${input.snapshot.url}`);
+  lines.push(
+    `Current page: ${input.snapshot.title ? `${JSON.stringify(input.snapshot.title)} ` : ""}${input.snapshot.url}`,
+  );
   lines.push("Snapshot:");
   lines.push(input.snapshot.text || "(the page has no accessible content)");
 

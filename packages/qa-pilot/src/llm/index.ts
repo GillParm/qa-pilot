@@ -20,7 +20,9 @@ export function createProvider(opts: CreateProviderOptions): LLMProvider {
   switch (opts.provider) {
     case "anthropic":
       if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) {
-        throw new LLMError("set ANTHROPIC_API_KEY to use the Anthropic provider", { retryable: false });
+        throw new LLMError("set ANTHROPIC_API_KEY to use the Anthropic provider", {
+          retryable: false,
+        });
       }
       return new AnthropicProvider({
         ...(opts.model ? { model: opts.model } : {}),

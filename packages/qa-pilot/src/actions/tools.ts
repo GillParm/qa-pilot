@@ -66,7 +66,9 @@ export const ACTION_TOOLS: ToolSpec[] = [
   tool(
     "navigate",
     "Go to a URL. Prefer clicking links; use this only when the instruction names a page or you are stuck.",
-    { url: { type: "string", description: "Absolute URL, or a path relative to the current page." } },
+    {
+      url: { type: "string", description: "Absolute URL, or a path relative to the current page." },
+    },
     ["url"],
   ),
   tool(
@@ -147,7 +149,9 @@ function need<T>(value: T | undefined, field: string, kind: string): T {
 /** Validates a tool call from any provider and turns it into a ProposedAction. */
 export function parseToolCall(name: string, input: unknown): ParsedToolCall {
   if (!(name in schemas)) {
-    throw new ToolInputError(`unknown tool "${name}"; use one of ${Object.keys(schemas).join(", ")}`);
+    throw new ToolInputError(
+      `unknown tool "${name}"; use one of ${Object.keys(schemas).join(", ")}`,
+    );
   }
   const result = schemas[name as keyof typeof schemas].safeParse(input);
   if (!result.success) {

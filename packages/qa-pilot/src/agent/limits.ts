@@ -72,7 +72,8 @@ export class Budget {
     this.totals.outputTokens += usage.outputTokens;
     this.totals.cacheReadTokens += usage.cacheReadTokens;
     this.totals.cacheWriteTokens += usage.cacheWriteTokens;
-    const cost = costOf(servedModel, usage, this.prices) ?? costOf(requestedModel, usage, this.prices);
+    const cost =
+      costOf(servedModel, usage, this.prices) ?? costOf(requestedModel, usage, this.prices);
     if (cost === undefined) {
       this.unpricedModels.add(servedModel);
       return { costUsd: 0, unpriced: true };

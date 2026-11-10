@@ -87,7 +87,8 @@ export class FakeProvider implements LLMProvider {
     const turn: Exclude<FakeTurn, (request: ToolCallRequest) => FakeTurn> = next;
     if ("error" in turn) throw turn.error;
     const usage = { ...DEFAULT_USAGE, ...turn.usage };
-    if ("text" in turn) return { text: turn.text, usage, model: this.model, stopReason: "end_turn" };
+    if ("text" in turn)
+      return { text: turn.text, usage, model: this.model, stopReason: "end_turn" };
 
     const isAction = (ACTION_TYPES as readonly string[]).includes(turn.tool);
     const input: FakeInput = isAction

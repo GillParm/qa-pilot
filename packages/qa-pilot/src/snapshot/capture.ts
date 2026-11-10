@@ -33,7 +33,10 @@ export interface CaptureOptions {
  * Takes an AI-mode ARIA snapshot. Refs in it stay valid until the next
  * snapshot of the same frame, so resolve any ref before snapshotting again.
  */
-export async function captureSnapshot(page: Page, opts: CaptureOptions = {}): Promise<PageSnapshot> {
+export async function captureSnapshot(
+  page: Page,
+  opts: CaptureOptions = {},
+): Promise<PageSnapshot> {
   const json = await page.ariaSnapshotJSON({ mode: "ai", timeout: opts.timeoutMs ?? 10_000 });
   const nodes = trimTree(toChildren(json), opts.trim ?? DEFAULT_TRIM);
   return {

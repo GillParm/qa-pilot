@@ -28,7 +28,9 @@ describe("costOf", () => {
 
   it("returns undefined for unknown models and honours overrides", () => {
     expect(costOf("mystery-model", usage(10, 10))).toBeUndefined();
-    expect(costOf("mystery-model", usage(1_000_000, 0), { "mystery-model": { input: 3, output: 9 } })).toBe(3);
+    expect(
+      costOf("mystery-model", usage(1_000_000, 0), { "mystery-model": { input: 3, output: 9 } }),
+    ).toBe(3);
     expect(priceFor("fake")).toEqual({ input: 0, output: 0 });
   });
 
@@ -49,7 +51,14 @@ describe("backoffDelay", () => {
   });
 
   it("waits at least as long as retry-after", () => {
-    expect(backoffDelay(0, { baseDelayMs: 1000, maxDelayMs: 8000, random: () => 0, retryAfterMs: 20_000 })).toBe(20_000);
+    expect(
+      backoffDelay(0, {
+        baseDelayMs: 1000,
+        maxDelayMs: 8000,
+        random: () => 0,
+        retryAfterMs: 20_000,
+      }),
+    ).toBe(20_000);
   });
 });
 

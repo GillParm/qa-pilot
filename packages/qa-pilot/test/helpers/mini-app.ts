@@ -19,7 +19,10 @@ const page = (title: string, body: string) => `<!doctype html>
 </script>
 </body></html>`;
 
-export function miniAppHtml(path: string, opts: MiniAppOptions = {}): { status: number; body: string } {
+export function miniAppHtml(
+  path: string,
+  opts: MiniAppOptions = {},
+): { status: number; body: string } {
   const button = opts.renamed ? "Add to bag" : "Add to cart";
   if (path === "/" || path === "/index.html") {
     return {
@@ -62,7 +65,9 @@ export function miniAppHtml(path: string, opts: MiniAppOptions = {}): { status: 
   return { status: 404, body: "not found" };
 }
 
-export async function startMiniApp(opts: MiniAppOptions = {}): Promise<{ url: string; server: Server; close: () => Promise<void> }> {
+export async function startMiniApp(
+  opts: MiniAppOptions = {},
+): Promise<{ url: string; server: Server; close: () => Promise<void> }> {
   const server = createServer((req, res) => {
     const { status, body } = miniAppHtml(new URL(req.url ?? "/", "http://x").pathname, opts);
     res.writeHead(status, { "content-type": status === 200 ? "text/html" : "text/plain" });
