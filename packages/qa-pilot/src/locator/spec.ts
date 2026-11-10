@@ -31,8 +31,16 @@ export function jsString(value: string): string {
   return JSON.stringify(value);
 }
 
-/** Renders a spec as Playwright code, e.g. `page.getByRole("button", { name: "Pay", exact: true })`. */
-export function toCode(spec: LocatorSpec, pageVar = "page"): string {
+/**
+ * Renders a spec as Playwright code, e.g. `page.getByRole("button", { name: "Pay", exact: true })`.
+ * `str` turns strings into literals; the exporter swaps it to emit template literals.
+ */
+export function toCode(
+  spec: LocatorSpec,
+  pageVar = "page",
+  str: (value: string) => string = jsString,
+): string {
+  const jsString = str;
   let code: string;
   switch (spec.kind) {
     case "role": {
