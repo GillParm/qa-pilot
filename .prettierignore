@@ -1,0 +1,9 @@
+node_modules
+dist
+.next
+package-lock.json
+qa-pilot-runs
+test-results
+playwright-report
+docs/live-runs
+demo-shop/next-env.d.ts
