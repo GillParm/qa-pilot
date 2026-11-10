@@ -7,3 +7,4 @@ test-results
 playwright-report
 docs/live-runs
 demo-shop/next-env.d.ts
+.generated
