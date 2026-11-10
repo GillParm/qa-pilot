@@ -5,6 +5,7 @@ import { chromium, type Browser, type BrowserContext, type Page } from "playwrig
 import { executeProposed, settle } from "../actions/execute.js";
 import { ACTION_TOOLS, parseToolCall, ToolInputError } from "../actions/tools.js";
 import { EvidenceRecorder } from "../evidence/recorder.js";
+import { writeReport } from "../report/html.js";
 import type { ModelPrice } from "../llm/pricing.js";
 import { withRetries } from "../llm/retry.js";
 import {
@@ -44,7 +45,9 @@ export interface RunOptions {
   onStep?: (step: StepRecord, run: { totals: RunRecord["totals"] }) => void;
   /** Called once the run folder exists. */
   onStart?: (runDir: string) => void;
-  /** Hook to write extra artifacts (the HTML report) once run.json is written. */
+  /** Write report.html next to run.json (default true). */
+  report?: boolean;
+  /** Hook to write extra artifacts once run.json and the report are written. */
   afterRun?: (record: RunRecord, runDir: string) => Promise<void>;
   /** Fixed run token (tests). */
   runToken?: string;
@@ -348,6 +351,7 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
     record.summary += ` (cost not tracked for ${[...budget.unpricedModels].join(", ")})`;
   }
   await recorder.writeRun(record);
+  if (opts.report !== false) await writeReport(record, recorder.runDir);
   await opts.afterRun?.(record, recorder.runDir);
   return { record, runDir: recorder.runDir };
 }
