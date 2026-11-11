@@ -1,7 +1,10 @@
 import { existsSync } from "node:fs";
+import { appendFile, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { Command, CommanderError, InvalidArgumentError, Option } from "commander";
 import { describeStep } from "./agent/prompt.js";
+import { renderComment, upsertComment, type CommentInput } from "./ci/comment.js";
+import { readPlaywrightReport } from "./ci/playwright-report.js";
 import { runAgent } from "./agent/run.js";
 import { REPORT_FILE } from "./evidence/recorder.js";
 import { exportRun } from "./export/spec.js";
@@ -11,7 +14,7 @@ import type { Effort } from "./llm/anthropic.js";
 import { formatUsd } from "./llm/pricing.js";
 import { formatDuration, VERDICT_LABEL } from "./report/html.js";
 import { loadSuite } from "./suite/config.js";
-import { runSuite, SUITE_HTML } from "./suite/runner.js";
+import { runSuite, SUITE_HTML, SUMMARY_JSON, type SuiteSummary } from "./suite/runner.js";
 import type { RunLimits, StepRecord } from "./types.js";
 import { VERSION } from "./version.js";
 
@@ -384,6 +387,106 @@ export function buildProgram(): Command {
       }
     },
   );
+
+  program
+    .command("github-comment")
+    .description("post or update the results comment on a pull request (used by the GitHub Action)")
+    .option("--suite-dir <dir>", "suite folder containing summary.json")
+    .option("--artifact-path <path>", "where the suite folder sits inside the uploaded artifact")
+    .option("--suite-skipped <reason>", "why the AI suite did not run")
+    .option("--specs-report <file>", "Playwright JSON report from replaying exported specs")
+    .option("--specs-skipped <reason>", "why the specs did not run")
+    .option("--base-url <url>", "the URL that was tested")
+    .option("--artifact-name <name>", "name of the uploaded artifact")
+    .option("--artifact-url <url>", "link to the uploaded artifact")
+    .option("--run-url <url>", "link to the workflow run")
+    .option(
+      "--image-base-url <url>",
+      "public URL where the artifact files are hosted, to embed screenshots",
+    )
+    .option("--repo <owner/name>", "repository (default: GITHUB_REPOSITORY)")
+    .option(
+      "--pr <number>",
+      "pull request number (default: from the workflow event)",
+      number("--pr"),
+    )
+    .option("--output <file>", "also write the comment to this file")
+    .option("--no-post", "do not call the GitHub API")
+    .action(
+      async (flags: {
+        suiteDir?: string;
+        artifactPath?: string;
+        suiteSkipped?: string;
+        specsReport?: string;
+        specsSkipped?: string;
+        baseUrl?: string;
+        artifactName?: string;
+        artifactUrl?: string;
+        runUrl?: string;
+        imageBaseUrl?: string;
+        repo?: string;
+        pr?: number;
+        output?: string;
+        post: boolean;
+      }) => {
+        const input: CommentInput = {};
+        if (flags.suiteDir) {
+          const summary = JSON.parse(
+            await readFile(path.join(flags.suiteDir, SUMMARY_JSON), "utf8"),
+          ) as SuiteSummary;
+          input.suite = {
+            summary,
+            artifactPath: flags.artifactPath ?? path.basename(flags.suiteDir),
+          };
+        }
+        if (flags.suiteSkipped) input.suiteSkipped = flags.suiteSkipped;
+        if (flags.specsReport && existsSync(flags.specsReport)) {
+          input.specs = await readPlaywrightReport(flags.specsReport);
+        } else if (flags.specsSkipped) {
+          input.specsSkipped = flags.specsSkipped;
+        }
+        for (const key of [
+          "baseUrl",
+          "artifactName",
+          "artifactUrl",
+          "runUrl",
+          "imageBaseUrl",
+        ] as const) {
+          if (flags[key]) input[key] = flags[key];
+        }
+        const body = renderComment(input);
+        if (flags.output) await writeFile(flags.output, body);
+        if (process.env.GITHUB_STEP_SUMMARY)
+          await appendFile(process.env.GITHUB_STEP_SUMMARY, `${body}\n`);
+
+        const repo = flags.repo ?? process.env.GITHUB_REPOSITORY;
+        let pr = flags.pr;
+        if (
+          pr === undefined &&
+          process.env.GITHUB_EVENT_PATH &&
+          existsSync(process.env.GITHUB_EVENT_PATH)
+        ) {
+          const event = JSON.parse(await readFile(process.env.GITHUB_EVENT_PATH, "utf8")) as {
+            pull_request?: { number?: number };
+          };
+          pr = event.pull_request?.number;
+        }
+        const token = process.env.GITHUB_TOKEN;
+        if (!flags.post || !repo || pr === undefined || !token) {
+          console.log(body);
+          console.log(dim("Not posting: needs --repo, a pull request number and GITHUB_TOKEN."));
+          return;
+        }
+        const result = await upsertComment({
+          token,
+          repo,
+          issue: pr,
+          body,
+          ...(process.env.GITHUB_API_URL ? { apiUrl: process.env.GITHUB_API_URL } : {}),
+        });
+        console.log(`${result.action === "created" ? "Posted" : "Updated"} ${result.url}`);
+      },
+    );
 
   return program;
 }
