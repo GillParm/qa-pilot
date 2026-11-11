@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "name": "Tin & Ember demo shop",
+  "suiteFile": "examples/demo-shop.suite.yaml",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "baseUrl": "http://localhost:3200",
+  "startedAt": "2026-11-11T00:18:03.838Z",
+  "finishedAt": "2026-11-11T00:24:10.657Z",
+  "durationMs": 366819,
+  "results": [
+    {
+      "name": "Product page shows the price",
+      "instruction": "From the product list, open the Trail mug product page and check that it shows the price $18.00.",
+      "tags": [
+        "catalogue",
+        "smoke"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Successfully opened Trail mug product page and verified price $18.00.",
+      "runDir": "20261111-001803-product-page-shows-the-price",
+      "steps": 15,
+      "costUsd": 0.0127285,
+      "durationMs": 88008
+    },
+    {
+      "name": "Adding to the cart updates the cart count",
+      "instruction": "Add the trail mug to the cart and check that the cart link in the header now shows 1 item.",
+      "tags": [
+        "cart",
+        "smoke"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/products/trail-mug",
+      "verdict": "error",
+      "asExpected": false,
+      "summary": "Stopped: step limit reached (15 steps).",
+      "runDir": "20261111-001931-adding-to-the-cart-updates-the-cart-count",
+      "steps": 15,
+      "costUsd": 0.012325500000000001,
+      "durationMs": 96268
+    },
+    {
+      "name": "Order total follows the quantity",
+      "instruction": "Add the trail mug ($18.00) to the cart, open the cart, change its quantity to 3 and check that the order total is $54.00.",
+      "tags": [
+        "cart"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/products/trail-mug",
+      "verdict": "fail",
+      "asExpected": false,
+      "summary": "Assertion failed at step 4 (Check order total is $54.00): text \"$54.00\" was not visible within 10s",
+      "runDir": "20261111-002108-order-total-follows-the-quantity",
+      "steps": 4,
+      "costUsd": 0.0031392,
+      "durationMs": 70217,
+      "failedStep": {
+        "index": 4,
+        "intent": "Check order total is $54.00",
+        "error": "text \"$54.00\" was not visible within 10s",
+        "screenshot": "steps/04.png"
+      }
+    },
+    {
+      "name": "Sign-up accepts an email with a plus sign",
+      "instruction": "Sign up as Ada with a new email address that contains a plus sign, such as ada+something@example.com, and a password of at least 8 characters. Check that the welcome message for Ada appears.",
+      "tags": [
+        "signup"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/signup",
+      "verdict": "fail",
+      "asExpected": false,
+      "summary": "The application rejected a valid email address with a plus sign, preventing signup.",
+      "runDir": "20261111-002218-sign-up-accepts-an-email-with-a-plus-sign",
+      "steps": 5,
+      "costUsd": 0.0039242,
+      "durationMs": 31388
+    },
+    {
+      "name": "Sign-up rejects a malformed email",
+      "instruction": "Try to sign up as Ada with the email address \"not-an-email\" and a password of at least 8 characters. Check that an error about the email address is shown.",
+      "tags": [
+        "signup"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/signup",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Successfully attempted sign up with invalid email 'not-an-email' and verified the validation error message 'Enter a valid email address.' is displayed.",
+      "runDir": "20261111-002249-sign-up-rejects-a-malformed-email",
+      "steps": 8,
+      "costUsd": 0.006347899999999999,
+      "durationMs": 80796
+    }
+  ],
+  "totals": {
+    "tests": 5,
+    "passed": 2,
+    "failed": 2,
+    "errors": 1,
+    "skipped": 0,
+    "asExpected": 2,
+    "unexpected": 3,
+    "costUsd": 0.0384653
+  },
+  "ok": false
+}
