@@ -1,0 +1,152 @@
+{
+  "suites": [
+    {
+      "title": "assert.spec.ts",
+      "file": "assert.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Mini add to cart",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3077,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 3000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add to cart', exact: true })\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 3000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add to cart', exact: true })\u001b[22m\n\n    at /repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts:11:74\n    at /repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts:10:3",
+                    "location": {
+                      "file": "/repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts",
+                      "column": 74,
+                      "line": 11
+                    },
+                    "snippet": " \u001b[90m  9 |\u001b[39m\n \u001b[90m 10 |\u001b[39m   \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m\"Add the mug to the cart\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 11 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m\"Add to cart\"\u001b[39m\u001b[33m,\u001b[39m exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 12 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 13 |\u001b[39m\n \u001b[90m 14 |\u001b[39m   \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m\"Check the cart count\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts",
+                        "column": 74,
+                        "line": 11
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 3000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add to cart', exact: true })\u001b[22m\n\n\n   9 |\n  10 |   await test.step(\"Add the mug to the cart\", async () => {\n> 11 |     await page.getByRole(\"button\", { name: \"Add to cart\", exact: true }).click();\n     |                                                                          ^\n  12 |   });\n  13 |\n  14 |   await test.step(\"Check the cart count\", async () => {\n    at /repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts:11:74\n    at /repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts:10:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Add the mug to the cart",
+                      "duration": 3004,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 3000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add to cart', exact: true })\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 3000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add to cart', exact: true })\u001b[22m\n\n    at /repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts:11:74\n    at /repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts:10:3",
+                        "location": {
+                          "file": "/repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts",
+                          "column": 74,
+                          "line": 11
+                        },
+                        "snippet": " \u001b[90m  9 |\u001b[39m\n \u001b[90m 10 |\u001b[39m   \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m\"Add the mug to the cart\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 11 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m\"Add to cart\"\u001b[39m\u001b[33m,\u001b[39m exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 12 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 13 |\u001b[39m\n \u001b[90m 14 |\u001b[39m   \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m\"Check the cart count\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {"
+                      }
+                    }
+                  ],
+                  "startTime": "2026-11-11T00:24:16.043Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/repo/packages/qa-pilot/test-results/assert-Mini-add-to-cart/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/repo/packages/qa-pilot/test/.generated/heal/assert.spec.ts",
+                    "column": 74,
+                    "line": 11
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9080a16ae1447c2c107d-a6b507100af2f0564c38",
+          "file": "assert.spec.ts",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "written.spec.ts",
+      "file": "written.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Mini add to cart",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 87,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Add the mug to the cart",
+                      "duration": 40
+                    },
+                    {
+                      "title": "Check the cart count",
+                      "duration": 3
+                    }
+                  ],
+                  "startTime": "2026-11-11T00:24:19.389Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b10916e2eb0ecfc3e756-4b63893ae5348399b030",
+          "file": "written.spec.ts",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-11T00:24:15.843Z",
+    "duration": 3719.159,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
