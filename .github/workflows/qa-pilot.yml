@@ -1,0 +1,51 @@
+name: qa-pilot on pull requests
+
+# Uses this repository's own action: starts the demo shop with its bugs off,
+# runs the sample suite with a real model (only when the API key secret is
+# available) and always replays the exported specs, then comments on the PR.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: qa-pilot-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qa-pilot:
+    name: Test the demo shop
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build -w qa-pilot
+      - run: npm run build -w demo-shop
+
+      - name: Start the demo shop with the seeded bugs off
+        run: |
+          DEMO_BUGS=off nohup npm run start -w demo-shop > "$RUNNER_TEMP/demo-shop.log" 2>&1 &
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:3200/ > /dev/null && exit 0
+            sleep 1
+          done
+          cat "$RUNNER_TEMP/demo-shop.log"
+          exit 1
+
+      - name: Run qa-pilot
+        uses: ./
+        with:
+          suite: examples/demo-shop.suite.yaml
+          url: http://localhost:3200
+          specs: examples/specs
+          max-cost: "3.00"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
