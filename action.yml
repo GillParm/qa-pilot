@@ -107,7 +107,7 @@ runs:
         key_var=ANTHROPIC_API_KEY
         if [ "$INPUT_PROVIDER" = "gemini" ]; then key_var=GEMINI_API_KEY; fi
         if [ -z "${!key_var:-}" ]; then
-          reason="no $key_var secret is available to this workflow (pull requests from forks do not get secrets)"
+          reason="no $key_var secret is available to this workflow (it is not set, or this is a pull request from a fork)"
           echo "::notice title=qa-pilot::AI suite skipped: $reason"
           echo "skipped=$reason" >> "$GITHUB_OUTPUT"
           exit 0
