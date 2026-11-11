@@ -44,3 +44,4 @@ test-results/
 playwright-report/
 blob-report/
 packages/qa-pilot/test/.generated/
+.qa-pilot-replay/

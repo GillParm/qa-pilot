@@ -1,0 +1,224 @@
+name: qa-pilot
+description: Test a deployment from plain-English instructions, replay exported Playwright specs, and post the results on the pull request.
+author: GillParm
+branding:
+  icon: check-square
+  color: blue
+
+inputs:
+  suite:
+    description: Path to a qa-pilot suite YAML file. Leave empty to only replay exported specs.
+    required: false
+    default: ""
+  url:
+    description: Base URL to test, usually the pull request's preview deployment. Overrides the suite's baseUrl and the specs' BASE_URL.
+    required: false
+    default: ""
+  provider:
+    description: Model provider, anthropic or gemini. The key is read from ANTHROPIC_API_KEY or GEMINI_API_KEY in the step's env.
+    required: false
+    default: anthropic
+  model:
+    description: Model id. Defaults to claude-opus-5-5 (anthropic) or gemini-3.5-flash-lite (gemini).
+    required: false
+    default: ""
+  max-cost:
+    description: Spending limit in USD for the whole AI suite. Tests stop starting once it is reached.
+    required: false
+    default: "2.00"
+  max-cost-per-test:
+    description: Spending limit in USD for each test.
+    required: false
+    default: "1.00"
+  specs:
+    description: Folder of Playwright specs exported by qa-pilot, replayed without a model against the same URL.
+    required: false
+    default: ""
+  comment:
+    description: Post or update one results comment on the pull request.
+    required: false
+    default: "true"
+  image-base-url:
+    description: Public URL where you publish the uploaded report folder. When set, failing screenshots are embedded in the comment; otherwise they are only in the artifact.
+    required: false
+    default: ""
+  artifact-name:
+    description: Name of the uploaded artifact holding reports, screenshots and videos.
+    required: false
+    default: qa-pilot-report
+  fail-on-unexpected:
+    description: Fail the job when a test does not end as its suite entry expects, or a replayed spec fails.
+    required: false
+    default: "true"
+  github-token:
+    description: Token used to post the comment. Needs pull-requests write permission.
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  suite-ok:
+    description: true when every AI test ended as expected, false when one did not, empty when the suite was skipped.
+    value: ${{ steps.suite.outputs.ok }}
+  specs-ok:
+    description: true when every replayed spec passed, false when one failed, empty when no specs ran.
+    value: ${{ steps.specs.outputs.ok }}
+  artifact-url:
+    description: Link to the uploaded artifact.
+    value: ${{ steps.upload.outputs.artifact-url }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 24
+
+    - name: Install qa-pilot
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        # Reuse an existing install (when the action runs from its own repository).
+        if [ ! -d node_modules/playwright ]; then
+          npm ci --workspace qa-pilot --no-audit --no-fund
+        fi
+        if [ ! -f packages/qa-pilot/dist/bin.js ]; then
+          npm run build --workspace qa-pilot
+        fi
+        npx playwright install --with-deps chromium
+
+    - name: Run the AI suite
+      id: suite
+      shell: bash
+      env:
+        INPUT_SUITE: ${{ inputs.suite }}
+        INPUT_URL: ${{ inputs.url }}
+        INPUT_PROVIDER: ${{ inputs.provider }}
+        INPUT_MODEL: ${{ inputs.model }}
+        INPUT_MAX_COST: ${{ inputs.max-cost }}
+        INPUT_MAX_COST_PER_TEST: ${{ inputs.max-cost-per-test }}
+      run: |
+        set -uo pipefail
+        out="$RUNNER_TEMP/qa-pilot"
+        mkdir -p "$out/suites"
+        if [ -z "$INPUT_SUITE" ]; then
+          echo "skipped=no suite file was given" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+        key_var=ANTHROPIC_API_KEY
+        if [ "$INPUT_PROVIDER" = "gemini" ]; then key_var=GEMINI_API_KEY; fi
+        if [ -z "${!key_var:-}" ]; then
+          reason="no $key_var secret is available to this workflow (pull requests from forks do not get secrets)"
+          echo "::notice title=qa-pilot::AI suite skipped: $reason"
+          echo "skipped=$reason" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+        args=(suite "$INPUT_SUITE" --provider "$INPUT_PROVIDER" --out "$out/suites"
+              --max-suite-cost "$INPUT_MAX_COST" --max-cost "$INPUT_MAX_COST_PER_TEST")
+        if [ -n "$INPUT_URL" ]; then args+=(--base-url "$INPUT_URL"); fi
+        if [ -n "$INPUT_MODEL" ]; then args+=(--model "$INPUT_MODEL"); fi
+        node "$GITHUB_ACTION_PATH/packages/qa-pilot/dist/bin.js" "${args[@]}"
+        code=$?
+        dir=$(find "$out/suites" -mindepth 1 -maxdepth 1 -type d | head -n 1)
+        if [ -n "$dir" ] && [ -f "$dir/summary.json" ]; then
+          echo "dir=$dir" >> "$GITHUB_OUTPUT"
+          if [ "$code" -eq 0 ]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "ok=false" >> "$GITHUB_OUTPUT"; fi
+        else
+          echo "skipped=qa-pilot exited with code $code before writing a summary" >> "$GITHUB_OUTPUT"
+          echo "ok=false" >> "$GITHUB_OUTPUT"
+        fi
+        exit 0
+
+    - name: Replay exported specs
+      id: specs
+      shell: bash
+      env:
+        INPUT_SPECS: ${{ inputs.specs }}
+        INPUT_URL: ${{ inputs.url }}
+      run: |
+        set -uo pipefail
+        out="$RUNNER_TEMP/qa-pilot"
+        mkdir -p "$out"
+        if [ -z "$INPUT_SPECS" ]; then
+          echo "skipped=no specs folder was given" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+        # Copy the specs next to the action's node_modules so @playwright/test resolves.
+        replay="$GITHUB_ACTION_PATH/.qa-pilot-replay"
+        rm -rf "$replay" && mkdir -p "$replay"
+        find "$INPUT_SPECS" -maxdepth 1 -name '*.spec.ts' -exec cp {} "$replay/" \;
+        if [ -z "$(ls -A "$replay")" ]; then
+          echo "skipped=no .spec.ts files in $INPUT_SPECS" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+        cat > "$replay/playwright.config.mjs" <<'EOF'
+        export default {
+          testDir: ".",
+          workers: 1,
+          retries: 0,
+          reporter: [["line"], ["json", { outputFile: process.env.QA_PILOT_SPECS_REPORT }]],
+          outputDir: process.env.QA_PILOT_SPECS_OUTPUT,
+          use: { headless: true, screenshot: "only-on-failure", trace: "retain-on-failure" },
+        };
+        EOF
+        if [ -n "$INPUT_URL" ]; then export QA_PILOT_BASE_URL="$INPUT_URL"; fi
+        QA_PILOT_SPECS_REPORT="$out/specs-report.json" QA_PILOT_SPECS_OUTPUT="$out/specs-results" \
+          node "$GITHUB_ACTION_PATH/node_modules/@playwright/test/cli.js" test --config "$replay/playwright.config.mjs"
+        code=$?
+        echo "report=$out/specs-report.json" >> "$GITHUB_OUTPUT"
+        if [ "$code" -eq 0 ]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "ok=false" >> "$GITHUB_OUTPUT"; fi
+        exit 0
+
+    - name: Upload reports
+      id: upload
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ runner.temp }}/qa-pilot
+        if-no-files-found: ignore
+
+    - name: Post results
+      if: always()
+      shell: bash
+      env:
+        INPUT_COMMENT: ${{ inputs.comment }}
+        INPUT_URL: ${{ inputs.url }}
+        INPUT_IMAGE_BASE_URL: ${{ inputs.image-base-url }}
+        INPUT_ARTIFACT_NAME: ${{ inputs.artifact-name }}
+        ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+        SUITE_DIR: ${{ steps.suite.outputs.dir }}
+        SUITE_SKIPPED: ${{ steps.suite.outputs.skipped }}
+        SPECS_REPORT: ${{ steps.specs.outputs.report }}
+        SPECS_SKIPPED: ${{ steps.specs.outputs.skipped }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        EVENT_NAME: ${{ github.event_name }}
+      run: |
+        set -uo pipefail
+        args=(github-comment --artifact-name "$INPUT_ARTIFACT_NAME"
+              --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
+        if [ -n "$ARTIFACT_URL" ]; then args+=(--artifact-url "$ARTIFACT_URL"); fi
+        if [ -n "$SUITE_DIR" ]; then
+          args+=(--suite-dir "$SUITE_DIR" --artifact-path "suites/$(basename "$SUITE_DIR")")
+        else
+          args+=(--suite-skipped "${SUITE_SKIPPED:-the suite did not run}")
+        fi
+        if [ -n "$SPECS_REPORT" ] && [ -f "$SPECS_REPORT" ]; then
+          args+=(--specs-report "$SPECS_REPORT")
+        else
+          args+=(--specs-skipped "${SPECS_SKIPPED:-the specs did not run}")
+        fi
+        if [ -n "$INPUT_URL" ]; then args+=(--base-url "$INPUT_URL"); fi
+        if [ -n "$INPUT_IMAGE_BASE_URL" ]; then args+=(--image-base-url "$INPUT_IMAGE_BASE_URL"); fi
+        if [ "$INPUT_COMMENT" != "true" ] || [[ "$EVENT_NAME" != pull_request* ]]; then args+=(--no-post); fi
+        node "$GITHUB_ACTION_PATH/packages/qa-pilot/dist/bin.js" "${args[@]}" || echo "::warning title=qa-pilot::could not post the results comment"
+
+    - name: Check results
+      if: inputs.fail-on-unexpected == 'true'
+      shell: bash
+      env:
+        SUITE_OK: ${{ steps.suite.outputs.ok }}
+        SPECS_OK: ${{ steps.specs.outputs.ok }}
+      run: |
+        if [ "$SUITE_OK" = "false" ]; then echo "::error title=qa-pilot::at least one AI test did not end as expected"; fi
+        if [ "$SPECS_OK" = "false" ]; then echo "::error title=qa-pilot::at least one replayed spec failed"; fi
+        if [ "$SUITE_OK" = "false" ] || [ "$SPECS_OK" = "false" ]; then exit 1; fi
