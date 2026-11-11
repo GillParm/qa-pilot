@@ -170,15 +170,16 @@ runs:
 
     - name: Upload reports
       id: upload
-      if: always()
+      if: ${{ !cancelled() }}
       uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.artifact-name }}
         path: ${{ runner.temp }}/qa-pilot
         if-no-files-found: ignore
 
+    # Not on cancellation: a cancelled run would overwrite the last good comment.
     - name: Post results
-      if: always()
+      if: ${{ !cancelled() }}
       shell: bash
       env:
         INPUT_COMMENT: ${{ inputs.comment }}
@@ -200,12 +201,12 @@ runs:
         if [ -n "$SUITE_DIR" ]; then
           args+=(--suite-dir "$SUITE_DIR" --artifact-path "suites/$(basename "$SUITE_DIR")")
         else
-          args+=(--suite-skipped "${SUITE_SKIPPED:-the suite did not run}")
+          args+=(--suite-skipped "${SUITE_SKIPPED:-an earlier step failed before the suite ran}")
         fi
         if [ -n "$SPECS_REPORT" ] && [ -f "$SPECS_REPORT" ]; then
           args+=(--specs-report "$SPECS_REPORT")
         else
-          args+=(--specs-skipped "${SPECS_SKIPPED:-the specs did not run}")
+          args+=(--specs-skipped "${SPECS_SKIPPED:-an earlier step failed before the specs ran}")
         fi
         if [ -n "$INPUT_URL" ]; then args+=(--base-url "$INPUT_URL"); fi
         if [ -n "$INPUT_IMAGE_BASE_URL" ]; then args+=(--image-base-url "$INPUT_IMAGE_BASE_URL"); fi
