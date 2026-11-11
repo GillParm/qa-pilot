@@ -31,7 +31,10 @@ describe("parseSuite", () => {
 
   it("names the field that is wrong", () => {
     expect(() =>
-      parseSuite(`name: x\ntests:\n  - name: a\n    instruction: b\n    expect: maybe\n`, "bad.yaml"),
+      parseSuite(
+        `name: x\ntests:\n  - name: a\n    instruction: b\n    expect: maybe\n`,
+        "bad.yaml",
+      ),
     ).toThrow(/bad\.yaml is not a valid suite:\n {2}tests\.0\.expect/);
     expect(() => parseSuite(`name: x\ntests: []\n`)).toThrow(/tests/);
     expect(() =>

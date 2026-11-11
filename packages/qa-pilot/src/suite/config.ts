@@ -98,7 +98,9 @@ export function resolveTests(suite: Suite, baseUrlOverride?: string): ResolvedTe
       }
     } else {
       if (!base) {
-        throw new SuiteError(`test "${t.name}" has no url, and the suite has no baseUrl (pass --base-url)`);
+        throw new SuiteError(
+          `test "${t.name}" has no url, and the suite has no baseUrl (pass --base-url)`,
+        );
       }
       startUrl = new URL(t.path ?? "/", base).toString();
     }
