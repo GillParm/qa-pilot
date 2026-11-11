@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-002938-order-total-follows-the-quantity",
+  "name": "Order total follows the quantity",
+  "instruction": "Add the trail mug ($18.00) to the cart, open the cart, change its quantity to 3 and check that the order total is $54.00.",
+  "startUrl": "http://localhost:3200/products/trail-mug",
+  "runToken": "qa991a2d",
+  "provider": "anthropic",
+  "model": "claude-opus-5-5",
+  "startedAt": "2026-11-11T00:29:38.072Z",
+  "finishedAt": "2026-11-11T00:29:57.775Z",
+  "durationMs": 19703,
+  "verdict": "pass",
+  "summary": "Added the trail mug to the cart and set quantity to 3. The order total showed $54.00 (3 × $18.00), as expected.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Add the trail mug to the cart",
+      "reasoning": "The product page shows the Add to cart button for the trail mug.",
+      "proposed": {
+        "type": "click",
+        "ref": "e23"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Add to cart",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Add to cart"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:29:39.144Z",
+      "durationMs": 3027,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3196,
+        "outputTokens": 119,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015164,
+        "attempts": 1,
+        "latencyMs": 2157
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Open the cart",
+      "reasoning": "The mug was added (Cart (1)); next open the cart to change quantity.",
+      "proposed": {
+        "type": "click",
+        "ref": "e35"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "link",
+          "name": "Cart (1)",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "link",
+        "name": "Cart (1)"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/cart",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:29:42.171Z",
+      "durationMs": 3664,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3219,
+        "outputTokens": 118,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015236,
+        "attempts": 1,
+        "latencyMs": 2494
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Set trail mug quantity to 3",
+      "reasoning": "The cart shows the trail mug with a quantity dropdown currently at 1.",
+      "proposed": {
+        "type": "select",
+        "ref": "e50",
+        "option": "3"
+      },
+      "action": {
+        "type": "select",
+        "locator": {
+          "kind": "label",
+          "text": "Quantity for Trail mug",
+          "exact": true
+        },
+        "option": "3"
+      },
+      "target": {
+        "role": "combobox",
+        "name": "Quantity for Trail mug"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/cart",
+      "urlAfter": "http://localhost:3200/cart",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:29:45.835Z",
+      "durationMs": 3275,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3243,
+        "outputTokens": 147,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015912,
+        "attempts": 1,
+        "latencyMs": 2440
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Verify order total is $54.00",
+      "reasoning": "Quantity is set to 3; the order total should be 3 × $18.00 = $54.00.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$54.00"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$54.00",
+        "locator": {
+          "kind": "text",
+          "text": "$54.00"
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/cart",
+      "urlAfter": "http://localhost:3200/cart",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:29:49.110Z",
+      "durationMs": 4086,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3269,
+        "outputTokens": 156,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.016196,
+        "attempts": 1,
+        "latencyMs": 3661
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 5,
+      "intent": "Finish cart total test",
+      "reasoning": "The mug was added, quantity set to 3, and the $54.00 total assertion passed.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Added the trail mug to the cart and set quantity to 3. The order total showed $54.00 (3 × $18.00), as expected."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Added the trail mug to the cart and set quantity to 3. The order total showed $54.00 (3 × $18.00), as expected."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/cart",
+      "urlAfter": "http://localhost:3200/cart",
+      "screenshot": "steps/05.png",
+      "startedAt": "2026-11-11T00:29:53.196Z",
+      "durationMs": 3470,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3286,
+        "outputTokens": 187,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.016884,
+        "attempts": 1,
+        "latencyMs": 3048
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 5,
+    "llmCalls": 5,
+    "inputTokens": 16213,
+    "outputTokens": 727,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.07939199999999999
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "video": "video.webm",
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

@@ -1,0 +1,51 @@
+qa-pilot 0.1.0: Tin & Ember demo shop (gemini/gemini-3.5-flash-lite)
+
+[1/5] Product page shows the price http://localhost:3200/
+   1. Open the Trail mug product page (click link "Trail mug") ok 28.0 s, $0.0009
+   2. Check that the product page shows the price $18.00 (assert text visible "$18.00") held 8.8 s, $0.0008
+   3. Verify Trail mug product page heading is visible (assert text visible "Trail mug") held 3.0 s, $0.0008
+   4. Finish test after successfully opening Trail mug product page and verifying the price $18.00 (done (pass): Opened the Trail mug product page from the product list and verified the price is $18.00.) ok 8.7 s, $0.0009
+  Passed, as expected (pass): Opened the Trail mug product page from the product list and verified the price is $18.00.
+
+[2/5] Adding to the cart updates the cart count http://localhost:3200/products/trail-mug
+   1. Add the trail mug to the cart (click button "Add to cart") ok 6.9 s, $0.0008
+   2. Check that cart link in header shows 1 item (assert text visible "Cart (1)") held 2.3 s, $0.0008
+   3. Assert cart link in the header shows 1 item (assert text visible "Cart (1)") error 1.6 s, $0.0008
+      repeats the assertion that passed at step 2
+   4. Verify cart link shows 1 item in header (assert text visible "Cart (1)") error 3.5 s, $0.0008
+      repeats the assertion that passed at step 2
+   5. Finish the test with status pass (done (pass): Added the trail mug to the cart and verified the cart link in the header shows 1 item.) ok 6.1 s, $0.0009
+  Passed, as expected (pass): Added the trail mug to the cart and verified the cart link in the header shows 1 item.
+
+[3/5] Order total follows the quantity http://localhost:3200/products/trail-mug
+   1. Add trail mug to cart (click button "Add to cart") ok 2.8 s, $0.0007
+   2. Open the cart page (click link "Cart (1)") ok 2.1 s, $0.0008
+   3. Change quantity to 3 (select "3" in combobox "Quantity for Trail mug") ok 2.7 s, $0.0008
+   4. Check that the order total is $54.00 (assert text visible "$54.00") held 6.8 s, $0.0008
+   5. Check that the order total is $54.00 (assert text visible "$54.00") error 7.6 s, $0.0008
+      repeats the assertion that passed at step 4
+   6. Finish test after verifying order total is $54.00 (done (pass): Trail mug added to cart, quantity changed to 3, and order total verified as $54.00.) ok 8.5 s, $0.0009
+  Passed, as expected (pass): Trail mug added to cart, quantity changed to 3, and order total verified as $54.00.
+
+[4/5] Sign-up accepts an email with a plus sign http://localhost:3200/signup
+   1. Enter name Ada (type "Ada" into textbox "Name") ok 3.0 s, $0.0007
+   2. Type email address with plus sign (type "ada+qaa3e9c2@example.com" into textbox "Email") ok 8.0 s, $0.0008
+   3. Type password into Password field (type "password123" into textbox "Password") ok 9.1 s, $0.0008
+   4. Click Create account button (click button "Create account") ok 6.8 s, $0.0008
+   5. Check that the welcome message for Ada appears (assert text visible "Welcome, Ada") held 7.9 s, $0.0008
+   6. Verify welcome message for Ada appears (assert text visible "Welcome, Ada") error 7.1 s, $0.0008
+      repeats the assertion that passed at step 5
+   7. Complete the test successfully (done (pass): Signed up as Ada with ada+qaa3e9c2@example.com and verified the welcome message.) ok 10.8 s, $0.0008
+  Passed, as expected (pass): Signed up as Ada with ada+qaa3e9c2@example.com and verified the welcome message.
+
+[5/5] Sign-up rejects a malformed email http://localhost:3200/signup
+   1. Enter name Ada (type "Ada" into textbox "Name") ok 6.4 s, $0.0007
+   2. Type invalid email address (type "not-an-email" into textbox "Email") ok 2.0 s, $0.0008
+   3. Type password into Password field (type "securepassword123" into textbox "Password") ok 5.9 s, $0.0008
+   4. Click Create account button (click button "Create account") ok 2.1 s, $0.0008
+   5. Check that email error message is shown (assert text visible "Enter a valid email address.") held 7.0 s, $0.0008
+   6. Finish the test successfully (done (pass): Tried to sign up with invalid email 'not-an-email', verified that the email error message 'Enter a valid email address.' is shown.) ok 1.6 s, $0.0009
+  Passed, as expected (pass): Tried to sign up with invalid email 'not-an-email', verified that the email error message 'Enter a valid email address.' is shown.
+
+Suite ok: 5 of 5 as expected, $0.02, 3 min 3 s
+Report: qa-pilot-runs/20261111-003646-suite-tin-ember-demo-shop/index.html

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "name": "Tin & Ember demo shop",
+  "suiteFile": "examples/demo-shop.suite.yaml",
+  "provider": "anthropic",
+  "model": "claude-opus-5-5",
+  "baseUrl": "http://localhost:3200",
+  "startedAt": "2026-11-11T00:29:04.133Z",
+  "finishedAt": "2026-11-11T00:30:49.999Z",
+  "durationMs": 105866,
+  "results": [
+    {
+      "name": "Product page shows the price",
+      "instruction": "From the product list, open the Trail mug product page and check that it shows the price $18.00.",
+      "tags": [
+        "catalogue",
+        "smoke"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Opened Trail mug from the product list. The product page at /products/trail-mug shows the price $18.00.",
+      "runDir": "20261111-002904-product-page-shows-the-price",
+      "steps": 4,
+      "costUsd": 0.068832,
+      "durationMs": 20131,
+      "exported": "examples/specs/product-page-shows-the-price.spec.ts"
+    },
+    {
+      "name": "Adding to the cart updates the cart count",
+      "instruction": "Add the trail mug to the cart and check that the cart link in the header now shows 1 item.",
+      "tags": [
+        "cart",
+        "smoke"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/products/trail-mug",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Adding the trail mug to the cart updated the header cart link to \"Cart (1)\".",
+      "runDir": "20261111-002924-adding-to-the-cart-updates-the-cart-count",
+      "steps": 3,
+      "costUsd": 0.048276,
+      "durationMs": 13595,
+      "exported": "examples/specs/adding-to-the-cart-updates-the-cart-count.spec.ts"
+    },
+    {
+      "name": "Order total follows the quantity",
+      "instruction": "Add the trail mug ($18.00) to the cart, open the cart, change its quantity to 3 and check that the order total is $54.00.",
+      "tags": [
+        "cart"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/products/trail-mug",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Added the trail mug to the cart and set quantity to 3. The order total showed $54.00 (3 × $18.00), as expected.",
+      "runDir": "20261111-002938-order-total-follows-the-quantity",
+      "steps": 5,
+      "costUsd": 0.07939199999999999,
+      "durationMs": 19703,
+      "exported": "examples/specs/order-total-follows-the-quantity.spec.ts"
+    },
+    {
+      "name": "Sign-up accepts an email with a plus sign",
+      "instruction": "Sign up as Ada with a new email address that contains a plus sign, such as ada+something@example.com, and a password of at least 8 characters. Check that the welcome message for Ada appears.",
+      "tags": [
+        "signup"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/signup",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Signed up as Ada with ada+qa9d2e76@example.com and an 8+ character password; \"Welcome, Ada\" message appeared, confirming the account for the plus-sign email.",
+      "runDir": "20261111-002957-sign-up-accepts-an-email-with-a-plus-sign",
+      "steps": 6,
+      "costUsd": 0.09375599999999999,
+      "durationMs": 23966,
+      "exported": "examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts"
+    },
+    {
+      "name": "Sign-up rejects a malformed email",
+      "instruction": "Try to sign up as Ada with the email address \"not-an-email\" and a password of at least 8 characters. Check that an error about the email address is shown.",
+      "tags": [
+        "signup"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/signup",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "I tried to sign up as Ada with \"not-an-email\" and an 11-character password. The form showed the error \"Enter a valid email address.\" and marked the Email field as invalid.",
+      "runDir": "20261111-003021-sign-up-rejects-a-malformed-email",
+      "steps": 6,
+      "costUsd": 0.09298800000000002,
+      "durationMs": 28215,
+      "exported": "examples/specs/sign-up-rejects-a-malformed-email.spec.ts"
+    }
+  ],
+  "totals": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "asExpected": 5,
+    "unexpected": 0,
+    "costUsd": 0.38324400000000003
+  },
+  "ok": true
+}

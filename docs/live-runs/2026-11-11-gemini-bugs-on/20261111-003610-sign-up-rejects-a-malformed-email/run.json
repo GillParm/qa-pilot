@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-003610-sign-up-rejects-a-malformed-email",
+  "name": "Sign-up rejects a malformed email",
+  "instruction": "Try to sign up as Ada with the email address \"not-an-email\" and a password of at least 8 characters. Check that an error about the email address is shown.",
+  "startUrl": "http://localhost:3201/signup",
+  "runToken": "qaf67252",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "startedAt": "2026-11-11T00:36:10.167Z",
+  "finishedAt": "2026-11-11T00:36:45.164Z",
+  "durationMs": 34997,
+  "verdict": "pass",
+  "summary": "Successfully tested signup with an invalid email address and verified the error message is displayed.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Enter Name Ada",
+      "reasoning": "Enter the name 'Ada' in the Name field as requested.",
+      "proposed": {
+        "type": "type",
+        "ref": "e15",
+        "text": "Ada"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Name",
+          "exact": true
+        },
+        "text": "Ada"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Name"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:36:11.228Z",
+      "durationMs": 2217,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2027,
+        "outputTokens": 49,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007306,
+        "attempts": 1,
+        "latencyMs": 1349
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Type invalid email address",
+      "reasoning": "The instruction asks to sign up with the email address \"not-an-email\" and a password of at least 8 characters. We already typed the name, now we need to type the email.",
+      "proposed": {
+        "type": "type",
+        "ref": "e18",
+        "text": "not-an-email"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Email",
+          "exact": true
+        },
+        "text": "not-an-email"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Email"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:36:13.445Z",
+      "durationMs": 2950,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2034,
+        "outputTokens": 82,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008152,
+        "attempts": 1,
+        "latencyMs": 2115
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Type password of at least 8 characters",
+      "reasoning": "We need to fill in the password of at least 8 characters as instructed before submitting the sign up form.",
+      "proposed": {
+        "type": "type",
+        "ref": "e21",
+        "text": "password123"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Password",
+          "exact": true
+        },
+        "text": "password123"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Password"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:36:16.395Z",
+      "durationMs": 10866,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2060,
+        "outputTokens": 66,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.000783,
+        "attempts": 1,
+        "latencyMs": 10011
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Click Create account button",
+      "reasoning": "We have filled in the sign up form with an invalid email address and need to submit it to see the email error message.",
+      "proposed": {
+        "type": "click",
+        "ref": "e24"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Create account",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Create account"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:36:27.261Z",
+      "durationMs": 9383,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2084,
+        "outputTokens": 56,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007652000000000001,
+        "attempts": 2,
+        "latencyMs": 8517
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 5,
+      "intent": "Check that an error about the email address is shown",
+      "reasoning": "The instruction requires checking that an error about the email address is shown, and the alert 'Enter a valid email address.' is visible on the page.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Enter a valid email address."
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Enter a valid email address.",
+        "locator": {
+          "kind": "text",
+          "text": "Enter a valid email address."
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/05.png",
+      "startedAt": "2026-11-11T00:36:36.644Z",
+      "durationMs": 6599,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2108,
+        "outputTokens": 78,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008274,
+        "attempts": 1,
+        "latencyMs": 6172
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 6,
+      "intent": "Complete the test successfully",
+      "reasoning": "We successfully signed up with an invalid email address and verified that the expected error message 'Enter a valid email address.' is shown. All instruction requirements have been fulfilled and asserted.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Successfully tested signup with an invalid email address and verified the error message is displayed."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Successfully tested signup with an invalid email address and verified the error message is displayed."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/06.png",
+      "startedAt": "2026-11-11T00:36:43.243Z",
+      "durationMs": 1917,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2123,
+        "outputTokens": 85,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008493999999999999,
+        "attempts": 1,
+        "latencyMs": 1493
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 6,
+    "llmCalls": 6,
+    "inputTokens": 12436,
+    "outputTokens": 416,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0047708
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

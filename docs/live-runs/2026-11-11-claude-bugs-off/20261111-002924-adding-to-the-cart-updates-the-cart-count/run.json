@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-002924-adding-to-the-cart-updates-the-cart-count",
+  "name": "Adding to the cart updates the cart count",
+  "instruction": "Add the trail mug to the cart and check that the cart link in the header now shows 1 item.",
+  "startUrl": "http://localhost:3200/products/trail-mug",
+  "runToken": "qa5b5fe5",
+  "provider": "anthropic",
+  "model": "claude-opus-5-5",
+  "startedAt": "2026-11-11T00:29:24.472Z",
+  "finishedAt": "2026-11-11T00:29:38.067Z",
+  "durationMs": 13595,
+  "verdict": "pass",
+  "summary": "Adding the trail mug to the cart updated the header cart link to \"Cart (1)\".",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Add the trail mug to the cart",
+      "reasoning": "The product page has an \"Add to cart\" button and the header cart currently shows 0.",
+      "proposed": {
+        "type": "click",
+        "ref": "e23"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Add to cart",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Add to cart"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:29:25.546Z",
+      "durationMs": 3210,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3183,
+        "outputTokens": 125,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015232,
+        "attempts": 1,
+        "latencyMs": 2327
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Cart link shows 1 item",
+      "reasoning": "The header cart link should now read \"Cart (1)\" after adding the mug.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Cart (1)"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Cart (1)",
+        "locator": {
+          "kind": "text",
+          "text": "Cart (1)"
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:29:28.756Z",
+      "durationMs": 3652,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3206,
+        "outputTokens": 151,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015843999999999997,
+        "attempts": 1,
+        "latencyMs": 3219
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Finish: cart shows 1 item",
+      "reasoning": "The trail mug was added and the header cart link now reads \"Cart (1)\", which an assertion already confirmed.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Adding the trail mug to the cart updated the header cart link to \"Cart (1)\"."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Adding the trail mug to the cart updated the header cart link to \"Cart (1)\"."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:29:32.408Z",
+      "durationMs": 4316,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3225,
+        "outputTokens": 215,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0172,
+        "attempts": 1,
+        "latencyMs": 3890
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 3,
+    "llmCalls": 3,
+    "inputTokens": 9614,
+    "outputTokens": 491,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.048276
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "video": "video.webm",
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-002823-sign-up-rejects-a-malformed-email",
+  "name": "Sign-up rejects a malformed email",
+  "instruction": "Try to sign up as Ada with the email address \"not-an-email\" and a password of at least 8 characters. Check that an error about the email address is shown.",
+  "startUrl": "http://localhost:3200/signup",
+  "runToken": "qa8fb91c",
+  "provider": "anthropic",
+  "model": "claude-opus-5-5",
+  "startedAt": "2026-11-11T00:28:23.152Z",
+  "finishedAt": "2026-11-11T00:28:45.162Z",
+  "durationMs": 22010,
+  "verdict": "pass",
+  "summary": "I signed up as Ada with the email \"not-an-email\" and a valid 8+ character password. The form showed the error \"Enter a valid email address.\" and flagged the Email field as invalid.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Enter name Ada",
+      "reasoning": "The signup form is visible; fill the Name field first.",
+      "proposed": {
+        "type": "type",
+        "ref": "e15",
+        "text": "Ada"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Name",
+          "exact": true
+        },
+        "text": "Ada"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Name"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:28:24.183Z",
+      "durationMs": 3432,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3087,
+        "outputTokens": 135,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015047999999999999,
+        "attempts": 1,
+        "latencyMs": 2569
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Enter invalid email",
+      "reasoning": "The instruction asks for the invalid email \"not-an-email\".",
+      "proposed": {
+        "type": "type",
+        "ref": "e18",
+        "text": "not-an-email"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Email",
+          "exact": true
+        },
+        "text": "not-an-email"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Email"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:28:27.615Z",
+      "durationMs": 3256,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3099,
+        "outputTokens": 140,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015196,
+        "attempts": 1,
+        "latencyMs": 2401
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Enter a valid password",
+      "reasoning": "Password must be at least 8 characters; the field is empty.",
+      "proposed": {
+        "type": "type",
+        "ref": "e21",
+        "text": "Ember2024!"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Password",
+          "exact": true
+        },
+        "text": "Ember2024!"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Password"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:28:30.871Z",
+      "durationMs": 3377,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3129,
+        "outputTokens": 140,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015316,
+        "attempts": 1,
+        "latencyMs": 2506
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Submit the sign up form",
+      "reasoning": "All fields are filled; submit to trigger email validation.",
+      "proposed": {
+        "type": "click",
+        "ref": "e24"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Create account",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Create account"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:28:34.249Z",
+      "durationMs": 2968,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3161,
+        "outputTokens": 114,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.014924,
+        "attempts": 1,
+        "latencyMs": 2090
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 5,
+      "intent": "Email error message is shown",
+      "reasoning": "The alert shows an email validation error after submitting an invalid email.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Enter a valid email address."
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Enter a valid email address.",
+        "locator": {
+          "kind": "text",
+          "text": "Enter a valid email address."
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/05.png",
+      "startedAt": "2026-11-11T00:28:37.217Z",
+      "durationMs": 2771,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3192,
+        "outputTokens": 148,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015728,
+        "attempts": 1,
+        "latencyMs": 2314
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 6,
+      "intent": "Finish signup email validation test",
+      "reasoning": "The email error \"Enter a valid email address.\" was asserted and is visible, and the Email field is marked invalid.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "I signed up as Ada with the email \"not-an-email\" and a valid 8+ character password. The form showed the error \"Enter a valid email address.\" and flagged the Email field as invalid."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "I signed up as Ada with the email \"not-an-email\" and a valid 8+ character password. The form showed the error \"Enter a valid email address.\" and flagged the Email field as invalid."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/06.png",
+      "startedAt": "2026-11-11T00:28:39.988Z",
+      "durationMs": 4460,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3213,
+        "outputTokens": 210,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.017051999999999998,
+        "attempts": 1,
+        "latencyMs": 4025
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 6,
+    "llmCalls": 6,
+    "inputTokens": 18881,
+    "outputTokens": 887,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.093264
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "video": "video.webm",
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

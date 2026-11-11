@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-003757-order-total-follows-the-quantity",
+  "name": "Order total follows the quantity",
+  "instruction": "Add the trail mug ($18.00) to the cart, open the cart, change its quantity to 3 and check that the order total is $54.00.",
+  "startUrl": "http://localhost:3200/products/trail-mug",
+  "runToken": "qa2bff37",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "startedAt": "2026-11-11T00:37:57.478Z",
+  "finishedAt": "2026-11-11T00:38:29.105Z",
+  "durationMs": 31627,
+  "verdict": "pass",
+  "summary": "Trail mug added to cart, quantity changed to 3, and order total verified as $54.00.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Add trail mug to cart",
+      "reasoning": "Click the Add to cart button for the trail mug.",
+      "proposed": {
+        "type": "click",
+        "ref": "e23"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Add to cart",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Add to cart"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:37:58.520Z",
+      "durationMs": 2820,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2113,
+        "outputTokens": 43,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007413999999999999,
+        "attempts": 1,
+        "latencyMs": 1961
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Open the cart page",
+      "reasoning": "The trail mug has been added to cart and the Cart (1) link is visible in the navigation.",
+      "proposed": {
+        "type": "click",
+        "ref": "e35"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "link",
+          "name": "Cart (1)",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "link",
+        "name": "Cart (1)"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/cart",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:38:01.340Z",
+      "durationMs": 2114,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2132,
+        "outputTokens": 52,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007696,
+        "attempts": 1,
+        "latencyMs": 956
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Change quantity to 3",
+      "reasoning": "The quantity combobox for the trail mug is available on the cart page. We need to select 3 as requested by the instruction.",
+      "proposed": {
+        "type": "select",
+        "ref": "e50",
+        "option": "3"
+      },
+      "action": {
+        "type": "select",
+        "locator": {
+          "kind": "label",
+          "text": "Quantity for Trail mug",
+          "exact": true
+        },
+        "option": "3"
+      },
+      "target": {
+        "role": "combobox",
+        "name": "Quantity for Trail mug"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/cart",
+      "urlAfter": "http://localhost:3200/cart",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:38:03.454Z",
+      "durationMs": 2676,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2151,
+        "outputTokens": 65,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008078,
+        "attempts": 1,
+        "latencyMs": 1837
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Check that the order total is $54.00",
+      "reasoning": "The instruction requires us to check that the order total is $54.00, which is visible in the order summary.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$54.00"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$54.00",
+        "locator": {
+          "kind": "text",
+          "text": "$54.00"
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/cart",
+      "urlAfter": "http://localhost:3200/cart",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:38:06.130Z",
+      "durationMs": 6786,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2169,
+        "outputTokens": 76,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008407,
+        "attempts": 3,
+        "latencyMs": 6360
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 5,
+      "intent": "Check that the order total is $54.00",
+      "reasoning": "We need to verify the order total is $54.00 as requested by the instruction.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$54.00"
+      },
+      "outcome": "error",
+      "error": "repeats the assertion that passed at step 4",
+      "urlBefore": "http://localhost:3200/cart",
+      "urlAfter": "http://localhost:3200/cart",
+      "startedAt": "2026-11-11T00:38:12.916Z",
+      "durationMs": 7632,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2184,
+        "outputTokens": 70,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008302,
+        "attempts": 1,
+        "latencyMs": 7226
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 6,
+      "intent": "Finish test after verifying order total is $54.00",
+      "reasoning": "All steps required by the instruction have been successfully completed and verified.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Trail mug added to cart, quantity changed to 3, and order total verified as $54.00."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Trail mug added to cart, quantity changed to 3, and order total verified as $54.00."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/cart",
+      "urlAfter": "http://localhost:3200/cart",
+      "screenshot": "steps/06.png",
+      "startedAt": "2026-11-11T00:38:20.549Z",
+      "durationMs": 8546,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2250,
+        "outputTokens": 80,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008749999999999999,
+        "attempts": 1,
+        "latencyMs": 8118
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 6,
+    "llmCalls": 6,
+    "inputTokens": 12999,
+    "outputTokens": 386,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0048647
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-002651-product-page-shows-the-price",
+  "name": "Product page shows the price",
+  "instruction": "From the product list, open the Trail mug product page and check that it shows the price $18.00.",
+  "startUrl": "http://localhost:3200/",
+  "runToken": "qa93881d",
+  "provider": "anthropic",
+  "model": "claude-opus-5-5",
+  "startedAt": "2026-11-11T00:26:51.521Z",
+  "finishedAt": "2026-11-11T00:27:11.400Z",
+  "durationMs": 19879,
+  "verdict": "pass",
+  "summary": "Opened the Trail mug product page from the product list and confirmed it shows the price $18.00.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Open the Trail mug product page",
+      "reasoning": "The Trail mug link is in the product list.",
+      "proposed": {
+        "type": "click",
+        "ref": "e19"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "link",
+          "name": "Trail mug",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "link",
+        "name": "Trail mug"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:26:52.844Z",
+      "durationMs": 4311,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3596,
+        "outputTokens": 112,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.016624,
+        "attempts": 1,
+        "latencyMs": 3359
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Verify Trail mug page heading",
+      "reasoning": "Confirm the product page opened is the Trail mug before checking the price.",
+      "proposed": {
+        "type": "assert",
+        "kind": "element_visible",
+        "ref": "e79"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "element_visible",
+        "locator": {
+          "kind": "role",
+          "role": "heading",
+          "name": "Trail mug",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "heading",
+        "name": "Trail mug"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:26:57.155Z",
+      "durationMs": 4880,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3186,
+        "outputTokens": 148,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015704,
+        "attempts": 1,
+        "latencyMs": 4430
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Check price shows $18.00",
+      "reasoning": "The instruction expects the Trail mug page to show the price $18.00.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$18.00"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$18.00",
+        "locator": {
+          "kind": "text",
+          "text": "$18.00",
+          "nth": 0
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:27:02.035Z",
+      "durationMs": 4086,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3206,
+        "outputTokens": 147,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015764,
+        "attempts": 1,
+        "latencyMs": 3660
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Finish test as passed",
+      "reasoning": "The Trail mug page opened, and both the heading and the $18.00 price were checked and passed.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Opened the Trail mug product page from the product list and confirmed it shows the price $18.00."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Opened the Trail mug product page from the product list and confirmed it shows the price $18.00."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:27:06.121Z",
+      "durationMs": 4151,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3223,
+        "outputTokens": 176,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.016412,
+        "attempts": 1,
+        "latencyMs": 3704
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 4,
+    "llmCalls": 4,
+    "inputTokens": 13211,
+    "outputTokens": 583,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.06450399999999999
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "video": "video.webm",
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

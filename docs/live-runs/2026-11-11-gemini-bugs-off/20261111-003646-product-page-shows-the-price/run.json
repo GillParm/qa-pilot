@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-003646-product-page-shows-the-price",
+  "name": "Product page shows the price",
+  "instruction": "From the product list, open the Trail mug product page and check that it shows the price $18.00.",
+  "startUrl": "http://localhost:3200/",
+  "runToken": "qae449be",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "startedAt": "2026-11-11T00:36:46.409Z",
+  "finishedAt": "2026-11-11T00:37:36.062Z",
+  "durationMs": 49653,
+  "verdict": "pass",
+  "summary": "Opened the Trail mug product page from the product list and verified the price is $18.00.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Open the Trail mug product page",
+      "reasoning": "Clicking the Trail mug link on the products list page will navigate to its product page.",
+      "proposed": {
+        "type": "click",
+        "ref": "e19"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "link",
+          "name": "Trail mug",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "link",
+        "name": "Trail mug"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:36:47.500Z",
+      "durationMs": 28049,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2445,
+        "outputTokens": 51,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.000861,
+        "attempts": 4,
+        "latencyMs": 27151
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Check that the product page shows the price $18.00",
+      "reasoning": "The instruction asks to check that the Trail mug product page shows the price $18.00.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$18.00"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$18.00",
+        "locator": {
+          "kind": "text",
+          "text": "$18.00",
+          "nth": 0
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:37:15.550Z",
+      "durationMs": 8828,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2101,
+        "outputTokens": 73,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008128,
+        "attempts": 1,
+        "latencyMs": 8399
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Verify Trail mug product page heading is visible",
+      "reasoning": "The instruction asks to check the Trail mug product page, and we are on it with the correct price verified in step 2. Let's make sure the page is fully verified and call done.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Trail mug"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Trail mug",
+        "locator": {
+          "kind": "text",
+          "text": "Trail mug",
+          "nth": 0
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:37:24.378Z",
+      "durationMs": 3018,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2116,
+        "outputTokens": 82,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008397999999999999,
+        "attempts": 1,
+        "latencyMs": 2594
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Finish test after successfully opening Trail mug product page and verifying the price $18.00",
+      "reasoning": "All instructions and expected verifications (opening Trail mug product page from the product list and checking the price $18.00) have been successfully completed and asserted in steps 1-3.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Opened the Trail mug product page from the product list and verified the price is $18.00."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Opened the Trail mug product page from the product list and verified the price is $18.00."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/products/trail-mug",
+      "urlAfter": "http://localhost:3200/products/trail-mug",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:37:27.396Z",
+      "durationMs": 8660,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2128,
+        "outputTokens": 111,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0009159000000000001,
+        "attempts": 2,
+        "latencyMs": 8218
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 4,
+    "llmCalls": 4,
+    "inputTokens": 8790,
+    "outputTokens": 317,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0034295000000000003
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

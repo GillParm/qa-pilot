@@ -1,0 +1,46 @@
+qa-pilot 0.1.0: Tin & Ember demo shop (gemini/gemini-3.5-flash-lite)
+
+[1/5] Product page shows the price http://localhost:3201/
+   1. Open Trail mug product page (click link "Trail mug") ok 2.2 s, $0.0009
+   2. Check that the product page shows the price $18.00 (assert text visible "$18.00") held 7.2 s, $0.0008
+   3. Verify the price $18.00 is visible on the product page (assert text visible "$18.00") error 1.3 s, $0.0009
+      repeats the assertion that passed at step 2
+   4. Finish test after checking Trail mug price (done (pass): Successfully navigated to Trail mug product page and verified the price $18.00.) ok 7.1 s, $0.0009
+  Passed, as expected (pass): Successfully navigated to Trail mug product page and verified the price $18.00.
+
+[2/5] Adding to the cart updates the cart count http://localhost:3201/products/trail-mug
+   1. Add the trail mug to the cart (click button "Add to cart") ok 1.8 s, $0.0008
+   2. Check that cart link in the header shows 1 item (assert text visible "Cart (1)") held 2.0 s, $0.0008
+   3. Check that the cart link in the header shows 1 item (assert text visible "Cart (1)") error 7.4 s, $0.0008
+      repeats the assertion that passed at step 2
+   4. Finish test successfully (done (pass): Successfully added the trail mug to the cart and verified the cart link shows 1 item.) ok 3.7 s, $0.0009
+  Passed, as expected (pass): Successfully added the trail mug to the cart and verified the cart link shows 1 item.
+
+[3/5] Order total follows the quantity http://localhost:3201/products/trail-mug
+   1. Add trail mug to cart (click button "Add to cart") ok 1.6 s, $0.0008
+   2. Open the cart (click link "Cart (1)") ok 2.1 s, $0.0008
+   3. Change quantity to 3 (select "3" in combobox "Quantity for Trail mug") ok 2.3 s, $0.0008
+   4. Check that order total is $54.00 (assert text visible "$54.00") FAILED 16.3 s, $0.0008
+      text "$54.00" was not visible within 10s
+  Failed, expected pass: Assertion failed at step 4 (Check that order total is $54.00): text "$54.00" was not visible within 10s
+
+[4/5] Sign-up accepts an email with a plus sign http://localhost:3201/signup
+   1. Enter Name Ada (type "Ada" into textbox "Name") ok 1.8 s, $0.0007
+   2. Type email address with plus sign (type "ada+qa7bce1e@example.com" into textbox "Email") ok 8.2 s, $0.0008
+   3. Type password into Password textbox (type "password123" into textbox "Password") ok 19.1 s, $0.0008
+   4. Click Create account button (click button "Create account") ok 1.8 s, $0.0008
+   5. Check that email error message is visible (assert text visible "Enter a valid email address.") held 1.5 s, $0.0008
+   6. Fail due to invalid email error for plus sign email (done (fail): The app rejects email addresses containing a plus sign (e.g. ada+qa7bce1e@example.com) as invalid, failing the requirement.) ok 7.6 s, $0.0009
+  Failed, expected pass: The app rejects email addresses containing a plus sign (e.g. ada+qa7bce1e@example.com) as invalid, failing the requirement.
+
+[5/5] Sign-up rejects a malformed email http://localhost:3201/signup
+   1. Enter Name Ada (type "Ada" into textbox "Name") ok 2.2 s, $0.0007
+   2. Type invalid email address (type "not-an-email" into textbox "Email") ok 3.0 s, $0.0008
+   3. Type password of at least 8 characters (type "password123" into textbox "Password") ok 10.9 s, $0.0008
+   4. Click Create account button (click button "Create account") ok 9.4 s, $0.0008
+   5. Check that an error about the email address is shown (assert text visible "Enter a valid email address.") held 6.6 s, $0.0008
+   6. Complete the test successfully (done (pass): Successfully tested signup with an invalid email address and verified the error message is displayed.) ok 1.9 s, $0.0008
+  Passed, as expected (pass): Successfully tested signup with an invalid email address and verified the error message is displayed.
+
+Suite not ok: 3 of 5 as expected, $0.02, 2 min 15 s
+Report: qa-pilot-runs/20261111-003430-suite-tin-ember-demo-shop/index.html

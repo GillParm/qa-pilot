@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-002801-sign-up-accepts-an-email-with-a-plus-sign",
+  "name": "Sign-up accepts an email with a plus sign",
+  "instruction": "Sign up as Ada with a new email address that contains a plus sign, such as ada+something@example.com, and a password of at least 8 characters. Check that the welcome message for Ada appears.",
+  "startUrl": "http://localhost:3200/signup",
+  "runToken": "qa07aea1",
+  "provider": "anthropic",
+  "model": "claude-opus-5-5",
+  "startedAt": "2026-11-11T00:28:01.930Z",
+  "finishedAt": "2026-11-11T00:28:23.149Z",
+  "durationMs": 21219,
+  "verdict": "fail",
+  "summary": "Signup fails for a valid email with a plus sign (ada+qa07aea1@example.com). The form shows \"Enter a valid email address.\", marks the Email field invalid and stays on /signup. No welcome message for Ada appears.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Enter name Ada",
+      "reasoning": "The signup form has a Name field; start by filling it with Ada.",
+      "proposed": {
+        "type": "type",
+        "ref": "e15",
+        "text": "Ada"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Name",
+          "exact": true
+        },
+        "text": "Ada"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Name"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:28:02.967Z",
+      "durationMs": 3986,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3100,
+        "outputTokens": 139,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015179999999999999,
+        "attempts": 1,
+        "latencyMs": 3090
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Enter plus-sign email",
+      "reasoning": "Email field is empty; use a unique plus-address with the run token.",
+      "proposed": {
+        "type": "type",
+        "ref": "e18",
+        "text": "ada+qa07aea1@example.com"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Email",
+          "exact": true
+        },
+        "text": "ada+qa07aea1@example.com"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Email"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:28:06.953Z",
+      "durationMs": 3324,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3112,
+        "outputTokens": 151,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015467999999999999,
+        "attempts": 1,
+        "latencyMs": 2448
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Enter an 8+ character password",
+      "reasoning": "The password field is empty and needs at least 8 characters.",
+      "proposed": {
+        "type": "type",
+        "ref": "e21",
+        "text": "Ember2024!"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Password",
+          "exact": true
+        },
+        "text": "Ember2024!"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Password"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:28:10.278Z",
+      "durationMs": 3239,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3158,
+        "outputTokens": 142,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015472,
+        "attempts": 1,
+        "latencyMs": 2361
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Submit the sign up form",
+      "reasoning": "All fields are filled; submit to create the account.",
+      "proposed": {
+        "type": "click",
+        "ref": "e24"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Create account",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Create account"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:28:13.517Z",
+      "durationMs": 3166,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3190,
+        "outputTokens": 111,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.014979999999999999,
+        "attempts": 1,
+        "latencyMs": 2274
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 5,
+      "intent": "Report plus-sign email rejected",
+      "reasoning": "The app rejected the valid email ada+qa07aea1@example.com with \"Enter a valid email address.\" and stayed on the signup page, so the welcome message never appeared.",
+      "proposed": {
+        "type": "done",
+        "status": "fail",
+        "summary": "Signup fails for a valid email with a plus sign (ada+qa07aea1@example.com). The form shows \"Enter a valid email address.\", marks the Email field invalid and stays on /signup. No welcome message for Ada appears."
+      },
+      "action": {
+        "type": "done",
+        "status": "fail",
+        "summary": "Signup fails for a valid email with a plus sign (ada+qa07aea1@example.com). The form shows \"Enter a valid email address.\", marks the Email field invalid and stays on /signup. No welcome message for Ada appears."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/05.png",
+      "startedAt": "2026-11-11T00:28:16.684Z",
+      "durationMs": 5603,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3221,
+        "outputTokens": 299,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.018864,
+        "attempts": 1,
+        "latencyMs": 5166
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 5,
+    "llmCalls": 5,
+    "inputTokens": 15781,
+    "outputTokens": 842,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.079964
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "video": "video.webm",
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

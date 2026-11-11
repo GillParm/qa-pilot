@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-002957-sign-up-accepts-an-email-with-a-plus-sign",
+  "name": "Sign-up accepts an email with a plus sign",
+  "instruction": "Sign up as Ada with a new email address that contains a plus sign, such as ada+something@example.com, and a password of at least 8 characters. Check that the welcome message for Ada appears.",
+  "startUrl": "http://localhost:3200/signup",
+  "runToken": "qa9d2e76",
+  "provider": "anthropic",
+  "model": "claude-opus-5-5",
+  "startedAt": "2026-11-11T00:29:57.779Z",
+  "finishedAt": "2026-11-11T00:30:21.745Z",
+  "durationMs": 23966,
+  "verdict": "pass",
+  "summary": "Signed up as Ada with ada+qa9d2e76@example.com and an 8+ character password; \"Welcome, Ada\" message appeared, confirming the account for the plus-sign email.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Enter name Ada",
+      "reasoning": "The signup form has a Name field; fill it first.",
+      "proposed": {
+        "type": "type",
+        "ref": "e15",
+        "text": "Ada"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Name",
+          "exact": true
+        },
+        "text": "Ada"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Name"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:29:58.811Z",
+      "durationMs": 3234,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3101,
+        "outputTokens": 134,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015084,
+        "attempts": 1,
+        "latencyMs": 2362
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Enter email with plus sign",
+      "reasoning": "Email field is empty; use the run token for a unique plus-sign address.",
+      "proposed": {
+        "type": "type",
+        "ref": "e18",
+        "text": "ada+qa9d2e76@example.com"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Email",
+          "exact": true
+        },
+        "text": "ada+qa9d2e76@example.com"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Email"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:30:02.045Z",
+      "durationMs": 4151,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3113,
+        "outputTokens": 154,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015532,
+        "attempts": 1,
+        "latencyMs": 3300
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Enter an 8+ character password",
+      "reasoning": "Name and email are filled; the password field is empty and needs at least 8 characters.",
+      "proposed": {
+        "type": "type",
+        "ref": "e21",
+        "text": "Ember2024!"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Password",
+          "exact": true
+        },
+        "text": "Ember2024!"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Password"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:30:06.196Z",
+      "durationMs": 4094,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3161,
+        "outputTokens": 150,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015643999999999998,
+        "attempts": 1,
+        "latencyMs": 3212
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Submit the sign-up form",
+      "reasoning": "All fields are filled; submitting creates the account.",
+      "proposed": {
+        "type": "click",
+        "ref": "e24"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Create account",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Create account"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:30:10.290Z",
+      "durationMs": 3170,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3193,
+        "outputTokens": 113,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.015031999999999998,
+        "attempts": 1,
+        "latencyMs": 2305
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 5,
+      "intent": "Verify welcome message for Ada",
+      "reasoning": "The snapshot shows a welcome region after account creation.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Welcome, Ada"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Welcome, Ada",
+        "locator": {
+          "kind": "text",
+          "text": "Welcome, Ada"
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/05.png",
+      "startedAt": "2026-11-11T00:30:13.460Z",
+      "durationMs": 2790,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3185,
+        "outputTokens": 148,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0157,
+        "attempts": 1,
+        "latencyMs": 2363
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 6,
+      "intent": "Finish signup test",
+      "reasoning": "Signup was submitted and the welcome message for Ada was verified.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Signed up as Ada with ada+qa9d2e76@example.com and an 8+ character password; \"Welcome, Ada\" message appeared, confirming the account for the plus-sign email."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Signed up as Ada with ada+qa9d2e76@example.com and an 8+ character password; \"Welcome, Ada\" message appeared, confirming the account for the plus-sign email."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/06.png",
+      "startedAt": "2026-11-11T00:30:16.250Z",
+      "durationMs": 4500,
+      "llm": {
+        "provider": "anthropic",
+        "model": "claude-opus-5-5",
+        "inputTokens": 3206,
+        "outputTokens": 197,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.016763999999999998,
+        "attempts": 1,
+        "latencyMs": 4078
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 6,
+    "llmCalls": 6,
+    "inputTokens": 18959,
+    "outputTokens": 896,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.09375599999999999
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "video": "video.webm",
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

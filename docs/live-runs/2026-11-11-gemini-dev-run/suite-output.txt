@@ -1,0 +1,62 @@
+   5. Verify the Trail mug product page shows the price $18.00 (assert text visible "$18.00") held 11.2 s, $0.0009
+   6. Verify Trail mug product page shows $18.00 (assert text visible "$18.00") held 1.6 s, $0.0009
+   7. Check price is $18.00 on product page (assert text visible "$18.00") held 10.4 s, $0.0008
+   8. Verify price $18.00 is visible on Trail mug page (assert text visible "$18.00") held 4.6 s, $0.0008
+   9. Check that price is $18.00 on Trail mug page (assert text visible "$18.00") held 7.8 s, $0.0008
+  10. Check price on Trail mug page (assert text visible "$18.00") held 8.8 s, $0.0008
+  11. Verify Trail mug product page shows the price $18.00 (assert text visible "$18.00") held 6.2 s, $0.0008
+  12. Check price is $18.00 (assert text visible "$18.00") held 6.1 s, $0.0008
+  13. Verify price is $18.00 (assert text visible "$18.00") held 2.8 s, $0.0008
+  14. Verify price $18.00 is visible on Trail mug page (assert text visible "$18.00") held 6.2 s, $0.0009
+  15. Finish test successfully (done (pass): Successfully opened Trail mug product page and verified price $18.00.) ok 6.1 s, $0.0009
+  Passed, as expected (pass): Successfully opened Trail mug product page and verified price $18.00.
+
+[2/5] Adding to the cart updates the cart count http://localhost:3200/products/trail-mug
+   1. Add the trail mug to the cart (click button "Add to cart") ok 34.2 s, $0.0008
+   2. Verify cart link shows 1 item (assert text visible "Cart (1)") held 1.3 s, $0.0008
+   3. Check that cart link in the header shows 1 item (assert text visible "Cart (1)") held 1.2 s, $0.0008
+   4. Check that the cart link in the header shows 1 item (assert text visible "Cart (1)") held 3.1 s, $0.0008
+   5. Verify cart link shows 1 item (assert text visible "Cart (1)") held 9.4 s, $0.0008
+   6. Verify cart link shows 1 item in header (assert text visible "Cart (1)") held 2.8 s, $0.0008
+   7. Check that the cart link in the header shows 1 item (assert text visible "Cart (1)") held 6.3 s, $0.0009
+   8. Check cart link in header shows 1 item (assert text visible "Cart (1)") held 1.7 s, $0.0008
+   9. Check that the cart link in the header shows 1 item (assert text visible "Cart (1)") held 1.9 s, $0.0008
+  10. Check that the cart link in the header shows 1 item (assert text visible "Cart (1)") held 1.6 s, $0.0008
+  11. Check that the cart link in the header shows 1 item (assert text visible "Cart (1)") held 1.9 s, $0.0009
+  12. Check that cart link shows 1 item (assert text visible "Cart (1)") held 4.0 s, $0.0008
+  13. Verify cart link shows 1 item (assert text visible "Cart (1)") held 18.0 s, $0.0008
+  14. Check cart link in header shows 1 item (assert text visible "Cart (1)") held 6.5 s, $0.0009
+  15. Check that the cart link in the header shows 1 item (assert text visible "Cart (1)") held 1.2 s, $0.0008
+  Stopped, expected pass: Stopped: step limit reached (15 steps).
+
+[3/5] Order total follows the quantity http://localhost:3200/products/trail-mug
+   1. Add the trail mug to the cart (click button "Add to cart") ok 4.8 s, $0.0008
+   2. Open the cart (click link "Cart (1)") ok 6.7 s, $0.0008
+   3. Change quantity to 3 (select "3" in combobox "Quantity for Trail mug") ok 45.8 s, $0.0008
+   4. Check order total is $54.00 (assert text visible "$54.00") FAILED 11.8 s, $0.0008
+      text "$54.00" was not visible within 10s
+  Failed, expected pass: Assertion failed at step 4 (Check order total is $54.00): text "$54.00" was not visible within 10s
+
+[4/5] Sign-up accepts an email with a plus sign http://localhost:3200/signup
+   1. Enter Name Ada (type "Ada" into textbox "Name") ok 9.9 s, $0.0007
+   2. Enter email address with a plus sign (type "ada+qa2d7d1d@example.com" into textbox "Email") ok 8.7 s, $0.0008
+   3. Type password into Password field (type "securepassword123" into textbox "Password") ok 3.4 s, $0.0008
+   4. Click Create account button (click button "Create account") ok 6.5 s, $0.0008
+   5. Fail test due to email validation bug blocking plus sign emails (done (fail): The application rejected a valid email address with a plus sign, preventing signup.) ok 1.8 s, $0.0009
+  Failed, expected pass: The application rejected a valid email address with a plus sign, preventing signup.
+
+[5/5] Sign-up rejects a malformed email http://localhost:3200/signup
+   1. Enter name Ada (type "Ada" into textbox "Name") ok 6.5 s, $0.0007
+   2. Enter invalid email address (type "not-an-email" into textbox "Email") ok 5.2 s, $0.0007
+   3. Enter a password of at least 8 characters (type "password123" into textbox "Password") ok 13.2 s, $0.0008
+   4. Click Create account button (click button "Create account") ok 4.3 s, $0.0008
+   5. Check that an error about the email address is shown (assert text visible "Enter a valid email address.") held 1.7 s, $0.0008
+   6. Verify email validation error is displayed (assert text visible "Enter a valid email address.") held 44.7 s, $0.0008
+   7. Check that the email error message is visible (assert text visible "Enter a valid email address.") held 2.9 s, $0.0008
+   8. Complete sign up error validation test (done (pass): Successfully attempted sign up with invalid email 'not-an-email' and verified the validation error message 'Enter a valid email address.' is displayed.) ok 1.3 s, $0.0008
+  Passed, as expected (pass): Successfully attempted sign up with invalid email 'not-an-email' and verified the validation error message 'Enter a valid email address.' is displayed.
+
+Suite not ok: 2 of 5 as expected, $0.04, 6 min 7 s
+Report: qa-pilot-runs/20261111-001803-suite-tin-ember-demo-shop/index.html
+
+[exited with code 0]

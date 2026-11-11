@@ -1,0 +1,399 @@
+{
+ "suites": [
+  {
+   "title": "adding-to-the-cart-updates-the-cart-count.spec.ts",
+   "file": "adding-to-the-cart-updates-the-cart-count.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Adding to the cart updates the cart count",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 0,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 246,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Add the trail mug to the cart",
+           "duration": 49
+          },
+          {
+           "title": "Cart link shows 1 item",
+           "duration": 5
+          }
+         ],
+         "startTime": "2026-11-11T00:31:17.165Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "4505b548c4a5ddc417b3-1a6a43f33634c7644bc4",
+     "file": "adding-to-the-cart-updates-the-cart-count.spec.ts",
+     "line": 10,
+     "column": 1
+    }
+   ]
+  },
+  {
+   "title": "order-total-follows-the-quantity.spec.ts",
+   "file": "order-total-follows-the-quantity.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Order total follows the quantity",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 0,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 5991,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('$54.00')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('$54.00') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('$54.00')\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('$54.00')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('$54.00') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('$54.00')\u001b[22m\n\n    at examples/specs/order-total-follows-the-quantity.spec.ts:26:44\n    at examples/specs/order-total-follows-the-quantity.spec.ts:25:3",
+          "location": {
+           "file": "examples/specs/order-total-follows-the-quantity.spec.ts",
+           "column": 44,
+           "line": 26
+          },
+          "snippet": " \u001b[90m 24 |\u001b[39m\n \u001b[90m 25 |\u001b[39m   \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m\"Verify order total is $54.00\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 26 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"$54.00\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 27 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m\n \u001b[90m 29 |\u001b[39m   \u001b[90m// Run summary: Added the trail mug to the cart and set quantity to 3. The order total showed $54.00 (3 \u00d7 $18.00), as expected.\u001b[39m"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "examples/specs/order-total-follows-the-quantity.spec.ts",
+            "column": 44,
+            "line": 26
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('$54.00')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('$54.00') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('$54.00')\u001b[22m\n\n\n  24 |\n  25 |   await test.step(\"Verify order total is $54.00\", async () => {\n> 26 |     await expect(page.getByText(\"$54.00\")).toBeVisible();\n     |                                            ^\n  27 |   });\n  28 |\n  29 |   // Run summary: Added the trail mug to the cart and set quantity to 3. The order total showed $54.00 (3 \u00d7 $18.00), as expected.\n    at examples/specs/order-total-follows-the-quantity.spec.ts:26:44\n    at examples/specs/order-total-follows-the-quantity.spec.ts:25:3"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Add the trail mug to the cart",
+           "duration": 39
+          },
+          {
+           "title": "Open the cart",
+           "duration": 34
+          },
+          {
+           "title": "Set trail mug quantity to 3",
+           "duration": 784
+          },
+          {
+           "title": "Verify order total is $54.00",
+           "duration": 5003,
+           "error": {
+            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('$54.00')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('$54.00') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('$54.00')\u001b[22m\n",
+            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('$54.00')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('$54.00') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('$54.00')\u001b[22m\n\n    at examples/specs/order-total-follows-the-quantity.spec.ts:26:44\n    at examples/specs/order-total-follows-the-quantity.spec.ts:25:3",
+            "location": {
+             "file": "examples/specs/order-total-follows-the-quantity.spec.ts",
+             "column": 44,
+             "line": 26
+            },
+            "snippet": " \u001b[90m 24 |\u001b[39m\n \u001b[90m 25 |\u001b[39m   \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m\"Verify order total is $54.00\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 26 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"$54.00\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 27 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m\n \u001b[90m 29 |\u001b[39m   \u001b[90m// Run summary: Added the trail mug to the cart and set quantity to 3. The order total showed $54.00 (3 \u00d7 $18.00), as expected.\u001b[39m"
+           }
+          }
+         ],
+         "startTime": "2026-11-11T00:31:17.536Z",
+         "annotations": [],
+         "attachments": [
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "test-results/order-total-follows-the-qu-32e48--total-follows-the-quantity/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "test-results/order-total-follows-the-qu-32e48--total-follows-the-quantity/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "examples/specs/order-total-follows-the-quantity.spec.ts",
+          "column": 44,
+          "line": 26
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "a53301a47a08b3e46bbc-619c05790199d5c49113",
+     "file": "order-total-follows-the-quantity.spec.ts",
+     "line": 10,
+     "column": 1
+    }
+   ]
+  },
+  {
+   "title": "product-page-shows-the-price.spec.ts",
+   "file": "product-page-shows-the-price.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Product page shows the price",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 1,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 212,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Open the Trail mug product page",
+           "duration": 65
+          },
+          {
+           "title": "Verify Trail mug price is $18.00",
+           "duration": 11
+          },
+          {
+           "title": "Verify Trail mug product page opened",
+           "duration": 3
+          }
+         ],
+         "startTime": "2026-11-11T00:31:23.849Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "6505b82dac409c90fc18-72ba6e9516668adbb8ed",
+     "file": "product-page-shows-the-price.spec.ts",
+     "line": 10,
+     "column": 1
+    }
+   ]
+  },
+  {
+   "title": "sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+   "file": "sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Sign-up accepts an email with a plus sign",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 1,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 5204,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Welcome, Ada')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('Welcome, Ada') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Welcome, Ada')\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Welcome, Ada')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('Welcome, Ada') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Welcome, Ada')\u001b[22m\n\n    at examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts:32:50\n    at examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts:31:3",
+          "location": {
+           "file": "examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+           "column": 50,
+           "line": 32
+          },
+          "snippet": " \u001b[90m 30 |\u001b[39m\n \u001b[90m 31 |\u001b[39m   \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m\"Verify welcome message for Ada\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"Welcome, Ada\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m\n \u001b[90m 35 |\u001b[39m   \u001b[90m// Run summary: Signed up as Ada with ada+qa9d2e76@example.com and an 8+ character password; \"Welcome, Ada\" message appeared, confirming the account for the plus-sign email.\u001b[39m"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+            "column": 50,
+            "line": 32
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Welcome, Ada')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('Welcome, Ada') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Welcome, Ada')\u001b[22m\n\n\n  30 |\n  31 |   await test.step(\"Verify welcome message for Ada\", async () => {\n> 32 |     await expect(page.getByText(\"Welcome, Ada\")).toBeVisible();\n     |                                                  ^\n  33 |   });\n  34 |\n  35 |   // Run summary: Signed up as Ada with ada+qa9d2e76@example.com and an 8+ character password; \"Welcome, Ada\" message appeared, confirming the account for the plus-sign email.\n    at examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts:32:50\n    at examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts:31:3"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Enter name Ada",
+           "duration": 16
+          },
+          {
+           "title": "Enter email with plus sign",
+           "duration": 6
+          },
+          {
+           "title": "Enter an 8+ character password",
+           "duration": 20
+          },
+          {
+           "title": "Submit the sign-up form",
+           "duration": 41
+          },
+          {
+           "title": "Verify welcome message for Ada",
+           "duration": 5004,
+           "error": {
+            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Welcome, Ada')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('Welcome, Ada') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Welcome, Ada')\u001b[22m\n",
+            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Welcome, Ada')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('Welcome, Ada') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Welcome, Ada')\u001b[22m\n\n    at examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts:32:50\n    at examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts:31:3",
+            "location": {
+             "file": "examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+             "column": 50,
+             "line": 32
+            },
+            "snippet": " \u001b[90m 30 |\u001b[39m\n \u001b[90m 31 |\u001b[39m   \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m\"Verify welcome message for Ada\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"Welcome, Ada\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m\n \u001b[90m 35 |\u001b[39m   \u001b[90m// Run summary: Signed up as Ada with ada+qa9d2e76@example.com and an 8+ character password; \"Welcome, Ada\" message appeared, confirming the account for the plus-sign email.\u001b[39m"
+           }
+          }
+         ],
+         "startTime": "2026-11-11T00:31:24.185Z",
+         "annotations": [],
+         "attachments": [
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "test-results/sign-up-accepts-an-email-w-a5dd7-s-an-email-with-a-plus-sign/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "test-results/sign-up-accepts-an-email-w-a5dd7-s-an-email-with-a-plus-sign/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "examples/specs/sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+          "column": 50,
+          "line": 32
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "191f6eaadc8e45bee001-df2780a8d626f93e2940",
+     "file": "sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+     "line": 12,
+     "column": 1
+    }
+   ]
+  },
+  {
+   "title": "sign-up-rejects-a-malformed-email.spec.ts",
+   "file": "sign-up-rejects-a-malformed-email.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Sign-up rejects a malformed email",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 2,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 254,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Enter name Ada",
+           "duration": 28
+          },
+          {
+           "title": "Enter invalid email",
+           "duration": 7
+          },
+          {
+           "title": "Enter a valid-length password",
+           "duration": 18
+          },
+          {
+           "title": "Submit the sign up form",
+           "duration": 38
+          },
+          {
+           "title": "Email error message is shown",
+           "duration": 30
+          }
+         ],
+         "startTime": "2026-11-11T00:31:29.701Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "45b5ad5678901496d426-29c5e65004a5d65e2005",
+     "file": "sign-up-rejects-a-malformed-email.spec.ts",
+     "line": 10,
+     "column": 1
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "stats": {
+  "startTime": "2026-11-11T00:31:16.903Z",
+  "duration": 13214.923,
+  "expected": 3,
+  "skipped": 0,
+  "unexpected": 2,
+  "flaky": 0
+ }
+}
