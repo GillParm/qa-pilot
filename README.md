@@ -312,18 +312,21 @@ are read at request time, so one build serves every mode. The page never reveals
 All numbers below come from real runs on 2026-11-11 (UTC). Raw outputs, including every `run.json`, are in
 [docs/live-runs](docs/live-runs), and [docs/live-results.md](docs/live-results.md) has the details.
 
-| Run                                         | Result                                      | Model calls | Tokens in / out | Cost    | Time       |
-| ------------------------------------------- | ------------------------------------------- | ----------- | --------------- | ------- | ---------- |
-| Sample suite, Claude Opus 5.5, bugs **on**  | 3 of 5 as expected; both seeded bugs caught | 22          | 70,404 / 3,385  | $0.35   | 1 min 54 s |
-| Sample suite, Claude Opus 5.5, bugs **off** | 5 of 5 passed; 5 specs exported             | 24          | 76,881 / 3,786  | $0.38   | 1 min 46 s |
-| Exported specs, plain Playwright, bugs off  | 5 of 5 passed                               | 0           | none            | $0      | 2.2 s      |
-| Exported specs, plain Playwright, bugs on   | 3 passed, 2 failed (the two bug tests)      | 0           | none            | $0      | 13.2 s     |
-| Heal of the renamed button, Claude Opus 5.5 | healed 1 locator; healed spec passed        | 1           | not recorded    | $0.0078 | n/a        |
+| Run                                               | Result                                      | Model calls | Tokens in / out | Cost               | Time       |
+| ------------------------------------------------- | ------------------------------------------- | ----------- | --------------- | ------------------ | ---------- |
+| Sample suite, Claude Opus 5.5, bugs **on**        | 3 of 5 as expected; both seeded bugs caught | 22          | 70,404 / 3,385  | $0.35              | 1 min 54 s |
+| Sample suite, Claude Opus 5.5, bugs **off**       | 5 of 5 passed; 5 specs exported             | 24          | 76,881 / 3,786  | $0.38              | 1 min 46 s |
+| Exported specs, plain Playwright, bugs off        | 5 of 5 passed                               | 0           | none            | $0                 | 2.2 s      |
+| Exported specs, plain Playwright, bugs on         | 3 passed, 2 failed (the two bug tests)      | 0           | none            | $0                 | 13.2 s     |
+| Heal of the renamed button, Claude Opus 5.5       | healed 1 locator; healed spec passed        | 1           | not recorded    | $0.0078            | n/a        |
+| Sample suite, Gemini 3.5 Flash-Lite, bugs **on**  | 3 of 5 as expected; both seeded bugs caught | 24          | 50,914 / 1,659  | $0.019 (free tier) | 2 min 15 s |
+| Sample suite, Gemini 3.5 Flash-Lite, bugs **off** | 5 of 5 passed                               | 28          | 59,610 / 1,945  | $0.023 (free tier) | 3 min 3 s  |
 
-Claude ran at the default effort (`medium`), which averaged about $0.016 per step on this shop. A development run of
-the same suite with `gemini-3.5-flash-lite` (free tier, $0.04 at list price) is in the raw data too. It caught both
-bugs, but in two tests it kept re-asserting text it had already verified and used all 15 steps (one of them stopped at
-the limit), which is what led to the repeated-assertion guard described below.
+Claude ran at the default effort (`medium`), which averaged about $0.016 per step on this shop. Gemini costs are list
+prices; the runs used the free tier. An earlier development run with Gemini, before the repeated-assertion guard, is in
+the raw data too: it caught both bugs, but in two tests it kept re-asserting text it had already verified and used all
+15 steps. That run is why the guard exists; in the two runs above it fired 6 times and each time the model moved on to
+`done`.
 
 ## Design decisions
 

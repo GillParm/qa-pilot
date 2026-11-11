@@ -101,10 +101,25 @@ using an earlier build. Raw data: [2026-11-11-gemini-dev-run](live-runs/2026-11-
 List-price cost $0.04 (actual cost $0, free tier); 6 min 7 s, partly because several calls needed a second attempt
 (recorded per step in the console output) and some single calls took over 40 seconds.
 The repeated assertions led to the guard that now refuses an assertion that has already passed and points the model
-at `done`, plus a line in the system prompt. The Gemini runs with the current build are described below if they were
-completed.
+at `done`, plus a line in the system prompt.
 
-## 6. What was not measured
+## 6. Sample suite with Gemini, current build
+
+After the guard was added, the suite was run again with `gemini-3.5-flash-lite` on the free tier, once against each
+shop. Raw data: [2026-11-11-gemini-bugs-on](live-runs/2026-11-11-gemini-bugs-on) and
+[2026-11-11-gemini-bugs-off](live-runs/2026-11-11-gemini-bugs-off).
+
+| Shop     | Result                                      | Model calls | Tokens in / out | List-price cost | Time       |
+| -------- | ------------------------------------------- | ----------: | --------------- | --------------: | ---------- |
+| Bugs on  | 3 of 5 as expected; both seeded bugs caught |          24 | 50,914 / 1,659  |          $0.019 | 2 min 15 s |
+| Bugs off | 5 of 5 passed                               |          28 | 59,610 / 1,945  |          $0.023 | 3 min 3 s  |
+
+The repeated-assertion guard fired 6 times across the two runs (2 with bugs on, 4 with bugs off). Each time the model
+called `done` on the next step, so no test ran into the step limit. Bug 1 was caught by a failed assertion on "$54.00"
+and bug 2 by `done(fail)` after the model saw "Enter a valid email address.", the same pattern as Claude. Gemini was
+slower per step on the free tier and used fewer tokens per call (a different tokenizer, and shorter replies).
+
+## 7. What was not measured
 
 - The AI suite inside GitHub Actions: the repository has no `ANTHROPIC_API_KEY` secret, so the workflow skips it. The
   same commands were run locally (sections 1 and 2).
@@ -112,6 +127,8 @@ completed.
   statistically meaningful pass rate.
 - Other models (`claude-sonnet-5-5`, `claude-haiku-5-5`, `gemini-3.8-flash`): supported by the price table and the
   `--model` flag but not run.
+- Exported specs from the Gemini runs: only the Claude bugs-off run was exported, so the committed specs all come from
+  Claude.
 
 ## Spend while building
 
