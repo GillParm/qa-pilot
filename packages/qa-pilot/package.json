@@ -39,7 +39,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run --project unit",
     "test:integration": "vitest run --project integration",
-    "test:all": "vitest run"
+    "test:live": "QA_PILOT_LIVE=1 vitest run --project live"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",
