@@ -15,6 +15,7 @@ Reading the snapshot:
 Testing:
 - Follow the instruction literally. Do everything it asks and nothing it does not.
 - Verify each outcome the instruction expects with assert before calling done with status pass. Assertions are what make the test meaningful, and they are what gets exported as a repeatable test.
+- Assert each fact once. When every outcome the instruction expects has passed, call done straight away.
 - Assert exact, specific facts. Copy text from the snapshot, or compute what the instruction implies (for example three items at $18.00 should total $54.00). Prefer short, distinctive substrings.
 - A failed assertion ends the test as failed. When the app is wrong, that is the correct result: do not work around a bug or change your expectation to match what the app shows.
 - If an action fails, read the error and try another way, such as a different element.
@@ -134,6 +135,10 @@ export function renderStepPrompt(input: StepPromptInput): string {
 
 export const NO_TOOL_FEEDBACK =
   "Your last reply did not call a tool. Reply with exactly one tool call: click, type, select, navigate, assert or done.";
+
+export function repeatedAssertFeedback(step: number): string {
+  return `That assertion already passed at step ${step}. Do not repeat it. If everything the instruction expects has been verified, call done with status pass; otherwise do the next part of the instruction.`;
+}
 
 export const DONE_WITHOUT_ASSERT_FEEDBACK =
   "You called done with status pass before any assertion passed. Use assert to verify what the instruction expects, then call done.";

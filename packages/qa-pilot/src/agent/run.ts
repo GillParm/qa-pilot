@@ -15,13 +15,21 @@ import {
   type ToolCallResponse,
 } from "../llm/types.js";
 import { captureSnapshot, type PageSnapshot } from "../snapshot/capture.js";
-import type { LlmCallRecord, RunLimits, RunRecord, StepRecord, Verdict } from "../types.js";
+import type {
+  LlmCallRecord,
+  ProposedAction,
+  RunLimits,
+  RunRecord,
+  StepRecord,
+  Verdict,
+} from "../types.js";
 import { playwrightVersion, VERSION } from "../version.js";
 import { Budget, resolveLimits } from "./limits.js";
 import {
   DONE_WITHOUT_ASSERT_FEEDBACK,
   NO_TOOL_FEEDBACK,
   renderStepPrompt,
+  repeatedAssertFeedback,
   SYSTEM_PROMPT,
 } from "./prompt.js";
 
@@ -127,7 +135,8 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
     await recorder.screenshot(page, "00-start");
 
     let consecutiveErrors = 0;
-    let assertionsPassed = 0;
+    // Assertion key → step that passed it.
+    const passedAssertions = new Map<string, number>();
     let feedback: string | undefined;
 
     for (;;) {
@@ -230,23 +239,39 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
 
       const { action: proposed, intent, reasoning } = parsed;
 
-      // done(pass) is only accepted once something has been verified.
-      if (proposed.type === "done" && proposed.status === "pass" && assertionsPassed === 0) {
-        feedback = DONE_WITHOUT_ASSERT_FEEDBACK;
+      // Refuse replies that would not move the test forward: done(pass) before
+      // anything was verified, or an assertion that already passed.
+      let rejection: { error: string; feedback: string; stop: string } | undefined;
+      const repeatOf = assertKey(proposed) ? passedAssertions.get(assertKey(proposed)!) : undefined;
+      if (proposed.type === "done" && proposed.status === "pass" && passedAssertions.size === 0) {
+        rejection = {
+          error: "done(pass) before any assertion passed",
+          feedback: DONE_WITHOUT_ASSERT_FEEDBACK,
+          stop: "the model kept finishing without verifying anything",
+        };
+      } else if (repeatOf !== undefined) {
+        rejection = {
+          error: `repeats the assertion that passed at step ${repeatOf}`,
+          feedback: repeatedAssertFeedback(repeatOf),
+          stop: "the model kept repeating assertions that had already passed",
+        };
+      }
+      if (rejection) {
+        feedback = rejection.feedback;
         const step = finishStep(base, {
           intent,
           reasoning,
           proposed,
           outcome: "error",
-          error: "done(pass) before any assertion passed",
+          error: rejection.error,
           urlAfter: page.url(),
           stepStarted,
         });
         steps.push(step);
         opts.onStep?.(step, budget);
         if (++consecutiveErrors >= limits.maxConsecutiveErrors) {
-          stopReason = "the model kept finishing without verifying anything";
-          summary = "Stopped: the model tried to pass without asserting anything.";
+          stopReason = rejection.stop;
+          summary = `Stopped: ${rejection.stop}.`;
           break;
         }
         continue;
@@ -295,7 +320,8 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
         continue;
       }
       consecutiveErrors = 0;
-      if (proposed.type === "assert") assertionsPassed++;
+      if (proposed.type === "assert")
+        passedAssertions.set(assertKey(proposed) ?? `step-${index}`, index);
       if (proposed.type === "done") {
         verdict = proposed.status;
         summary = proposed.summary;
@@ -355,6 +381,14 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
   if (opts.report !== false) await writeReport(record, recorder.runDir);
   await opts.afterRun?.(record, recorder.runDir);
   return { record, runDir: recorder.runDir };
+}
+
+/** Identity of an assertion that does not depend on snapshot refs, for spotting repeats. */
+function assertKey(action: ProposedAction): string | undefined {
+  if (action.type !== "assert") return undefined;
+  if (action.kind === "text_visible") return `text:${action.text}`;
+  if (action.kind === "url_matches") return `url:${action.pattern}`;
+  return undefined;
 }
 
 function finishStep(

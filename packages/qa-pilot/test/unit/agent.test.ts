@@ -126,6 +126,20 @@ describe("runAgent with the fake provider", () => {
     expect(record.steps[0]?.error).toMatch(/before any assertion/);
   });
 
+  it("refuses an assertion that already passed and points the model at done", async () => {
+    const provider = new FakeProvider([
+      fake.assertText("Trail mug"),
+      fake.assertText("Trail mug"),
+      fake.done("pass", "Verified once."),
+    ]);
+    const { record } = await run(provider);
+    expect(record.verdict).toBe("pass");
+    expect(record.steps[1]?.error).toBe("repeats the assertion that passed at step 1");
+    expect(provider.requests[2]?.messages[0]?.content).toContain(
+      "That assertion already passed at step 1",
+    );
+  });
+
   it("nudges the model when it answers without a tool call", async () => {
     const provider = new FakeProvider([
       { text: "Let me think." },
