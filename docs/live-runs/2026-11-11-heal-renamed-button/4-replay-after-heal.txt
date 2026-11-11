@@ -1,0 +1,3 @@
+Running 1 test using 1 worker
+  ✓  1 order-total-follows-the-quantity.spec.ts:10:1 › Order total follows the quantity (974ms)
+  1 passed (1.4s)

@@ -1,0 +1,18 @@
+Running 1 test using 1 worker
+  ✘  1 order-total-follows-the-quantity.spec.ts:10:1 › Order total follows the quantity (8.8s)
+  1) order-total-follows-the-quantity.spec.ts:10:1 › Order total follows the quantity › Add the trail mug to the cart 
+    TimeoutError: locator.click: Timeout 8000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Add to cart', exact: true })
+      12 |
+      13 |   await test.step("Add the trail mug to the cart", async () => {
+    > 14 |     await page.getByRole("button", { name: "Add to cart", exact: true }).click();
+         |                                                                          ^
+      15 |   });
+      16 |
+      17 |   await test.step("Open the cart", async () => {
+        at packages/qa-pilot/test/.generated/live-heal/order-total-follows-the-quantity.spec.ts:14:74
+        at packages/qa-pilot/test/.generated/live-heal/order-total-follows-the-quantity.spec.ts:13:3
+    Error Context: ../../../test-results/order-total-follows-the-qu-32e48--total-follows-the-quantity/error-context.md
+  1 failed
+    order-total-follows-the-quantity.spec.ts:10:1 › Order total follows the quantity ───────────────

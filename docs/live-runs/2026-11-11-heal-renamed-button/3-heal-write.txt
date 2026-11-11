@@ -1,0 +1,28 @@
+qa-pilot 0.1.0: healing order-total-follows-the-quantity.spec.ts with anthropic/claude-opus-5-5
+
+  line 11: setup ok
+  line 14: Add the trail mug to the cart broken: button "Add to cart" matches no element
+    proposed page.getByRole("button", { name: "Add to bag", exact: true }) works
+    On the trail mug product page, "Add to bag" is the only add-to-cart action. The button was renamed from "Add to cart" and still does the same job.
+  line 18: Open the cart ok
+  line 22: Set trail mug quantity to 3 ok
+  line 26: Verify order total is $54.00 ok
+  re-run of healed spec: passed
+
+Index: order-total-follows-the-quantity.spec.ts
+===================================================================
+--- order-total-follows-the-quantity.spec.ts	original
++++ order-total-follows-the-quantity.spec.ts	healed
+@@ -10,9 +10,9 @@
+ test("Order total follows the quantity", async ({ page }) => {
+   await page.goto(new URL("/products/trail-mug", BASE_URL).toString());
+ 
+   await test.step("Add the trail mug to the cart", async () => {
+-    await page.getByRole("button", { name: "Add to cart", exact: true }).click();
++    await page.getByRole("button", { name: "Add to bag", exact: true }).click();
+   });
+ 
+   await test.step("Open the cart", async () => {
+     await page.getByRole("link", { name: "Cart (1)", exact: true }).click();
+
+Healed 1 locator ($0.0078). Saved order-total-follows-the-quantity.spec.ts.
