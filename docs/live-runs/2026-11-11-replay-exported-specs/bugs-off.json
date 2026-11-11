@@ -1,0 +1,309 @@
+{
+ "suites": [
+  {
+   "title": "adding-to-the-cart-updates-the-cart-count.spec.ts",
+   "file": "adding-to-the-cart-updates-the-cart-count.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Adding to the cart updates the cart count",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 0,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 209,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Add the trail mug to the cart",
+           "duration": 79
+          },
+          {
+           "title": "Cart link shows 1 item",
+           "duration": 6
+          }
+         ],
+         "startTime": "2026-11-11T00:31:06.773Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "4505b548c4a5ddc417b3-1a6a43f33634c7644bc4",
+     "file": "adding-to-the-cart-updates-the-cart-count.spec.ts",
+     "line": 10,
+     "column": 1
+    }
+   ]
+  },
+  {
+   "title": "order-total-follows-the-quantity.spec.ts",
+   "file": "order-total-follows-the-quantity.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Order total follows the quantity",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 0,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 981,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Add the trail mug to the cart",
+           "duration": 55
+          },
+          {
+           "title": "Open the cart",
+           "duration": 33
+          },
+          {
+           "title": "Set trail mug quantity to 3",
+           "duration": 785
+          },
+          {
+           "title": "Verify order total is $54.00",
+           "duration": 5
+          }
+         ],
+         "startTime": "2026-11-11T00:31:07.093Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "a53301a47a08b3e46bbc-619c05790199d5c49113",
+     "file": "order-total-follows-the-quantity.spec.ts",
+     "line": 10,
+     "column": 1
+    }
+   ]
+  },
+  {
+   "title": "product-page-shows-the-price.spec.ts",
+   "file": "product-page-shows-the-price.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Product page shows the price",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 0,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 160,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Open the Trail mug product page",
+           "duration": 51
+          },
+          {
+           "title": "Verify Trail mug price is $18.00",
+           "duration": 4
+          },
+          {
+           "title": "Verify Trail mug product page opened",
+           "duration": 10
+          }
+         ],
+         "startTime": "2026-11-11T00:31:08.084Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "6505b82dac409c90fc18-72ba6e9516668adbb8ed",
+     "file": "product-page-shows-the-price.spec.ts",
+     "line": 10,
+     "column": 1
+    }
+   ]
+  },
+  {
+   "title": "sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+   "file": "sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Sign-up accepts an email with a plus sign",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 0,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 205,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Enter name Ada",
+           "duration": 29
+          },
+          {
+           "title": "Enter email with plus sign",
+           "duration": 6
+          },
+          {
+           "title": "Enter an 8+ character password",
+           "duration": 14
+          },
+          {
+           "title": "Submit the sign-up form",
+           "duration": 32
+          },
+          {
+           "title": "Verify welcome message for Ada",
+           "duration": 26
+          }
+         ],
+         "startTime": "2026-11-11T00:31:08.255Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "191f6eaadc8e45bee001-df2780a8d626f93e2940",
+     "file": "sign-up-accepts-an-email-with-a-plus-sign.spec.ts",
+     "line": 12,
+     "column": 1
+    }
+   ]
+  },
+  {
+   "title": "sign-up-rejects-a-malformed-email.spec.ts",
+   "file": "sign-up-rejects-a-malformed-email.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "Sign-up rejects a malformed email",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "",
+       "projectName": "",
+       "results": [
+        {
+         "workerIndex": 0,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 185,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "steps": [
+          {
+           "title": "Enter name Ada",
+           "duration": 15
+          },
+          {
+           "title": "Enter invalid email",
+           "duration": 6
+          },
+          {
+           "title": "Enter a valid-length password",
+           "duration": 13
+          },
+          {
+           "title": "Submit the sign up form",
+           "duration": 28
+          },
+          {
+           "title": "Email error message is shown",
+           "duration": 29
+          }
+         ],
+         "startTime": "2026-11-11T00:31:08.471Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "45b5ad5678901496d426-29c5e65004a5d65e2005",
+     "file": "sign-up-rejects-a-malformed-email.spec.ts",
+     "line": 10,
+     "column": 1
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "stats": {
+  "startTime": "2026-11-11T00:31:06.506Z",
+  "duration": 2194.065,
+  "expected": 5,
+  "skipped": 0,
+  "unexpected": 0,
+  "flaky": 0
+ }
+}
