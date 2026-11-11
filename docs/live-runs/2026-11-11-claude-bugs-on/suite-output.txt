@@ -1,0 +1,42 @@
+qa-pilot 0.1.0: Tin & Ember demo shop (anthropic/claude-opus-5-5)
+
+[1/5] Product page shows the price http://localhost:3200/
+   1. Open the Trail mug product page (click link "Trail mug") ok 4.3 s, $0.02
+   2. Verify Trail mug page heading (assert heading "Trail mug" is visible) held 4.9 s, $0.02
+   3. Check price shows $18.00 (assert text visible "$18.00") held 4.1 s, $0.02
+   4. Finish test as passed (done (pass): Opened the Trail mug product page from the product list and confirmed it shows the price $18.00.) ok 4.2 s, $0.02
+  Passed, as expected (pass): Opened the Trail mug product page from the product list and confirmed it shows the price $18.00.
+
+[2/5] Adding to the cart updates the cart count http://localhost:3200/products/trail-mug
+   1. Add the trail mug to the cart (click button "Add to cart") ok 6.3 s, $0.02
+   2. Header cart link shows 1 item (assert text visible "Cart (1)") held 4.7 s, $0.02
+   3. Finish: cart shows 1 item (done (pass): Clicking "Add to cart" on the trail mug page changed the header cart link to "Cart (1)", as expected.) ok 5.9 s, $0.02
+  Passed, as expected (pass): Clicking "Add to cart" on the trail mug page changed the header cart link to "Cart (1)", as expected.
+
+[3/5] Order total follows the quantity http://localhost:3200/products/trail-mug
+   1. Add the trail mug to the cart (click button "Add to cart") ok 3.9 s, $0.02
+   2. Open the cart (click link "Cart (1)") ok 4.9 s, $0.02
+   3. Set trail mug quantity to 3 (select "3" in combobox "Quantity for Trail mug") ok 4.8 s, $0.02
+   4. Check order total is $54.00 (assert text visible "$54.00") FAILED 14.5 s, $0.02
+      text "$54.00" was not visible within 10s
+  Failed, expected pass: Assertion failed at step 4 (Check order total is $54.00): text "$54.00" was not visible within 10s
+
+[4/5] Sign-up accepts an email with a plus sign http://localhost:3200/signup
+   1. Enter name Ada (type "Ada" into textbox "Name") ok 4.0 s, $0.02
+   2. Enter plus-sign email (type "ada+qa07aea1@example.com" into textbox "Email") ok 3.3 s, $0.02
+   3. Enter an 8+ character password (type "Ember2024!" into textbox "Password") ok 3.2 s, $0.02
+   4. Submit the sign up form (click button "Create account") ok 3.2 s, $0.01
+   5. Report plus-sign email rejected (done (fail): Signup fails for a valid email with a plus sign (ada+qa07aea1@example.com). The form shows "Enter a valid email address.", marks the Email field invalid and stays on /signup. No welcome message for Ada appears.) ok 5.6 s, $0.02
+  Failed, expected pass: Signup fails for a valid email with a plus sign (ada+qa07aea1@example.com). The form shows "Enter a valid email address.", marks the Email field invalid and stays on /signup. No welcome message for Ada appears.
+
+[5/5] Sign-up rejects a malformed email http://localhost:3200/signup
+   1. Enter name Ada (type "Ada" into textbox "Name") ok 3.4 s, $0.02
+   2. Enter invalid email (type "not-an-email" into textbox "Email") ok 3.3 s, $0.02
+   3. Enter a valid password (type "Ember2024!" into textbox "Password") ok 3.4 s, $0.02
+   4. Submit the sign up form (click button "Create account") ok 3.0 s, $0.01
+   5. Email error message is shown (assert text visible "Enter a valid email address.") held 2.8 s, $0.02
+   6. Finish signup email validation test (done (pass): I signed up as Ada with the email "not-an-email" and a valid 8+ character password. The form showed the error "Enter a valid email address." and flagged the Email field as invalid.) ok 4.5 s, $0.02
+  Passed, as expected (pass): I signed up as Ada with the email "not-an-email" and a valid 8+ character password. The form showed the error "Enter a valid email address." and flagged the Email field as invalid.
+
+Suite not ok: 3 of 5 as expected, $0.35, 1 min 54 s
+Report: qa-pilot-runs/20261111-002651-suite-tin-ember-demo-shop/index.html
