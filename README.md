@@ -128,15 +128,15 @@ file can be attached anywhere; the video is linked from the same folder.
 
 The export is a translation of `run.json`, not a second model call. Only steps that succeeded are written, in order:
 
-| Recorded step                                  | Exported code                                                                 |
-| ---------------------------------------------- | ----------------------------------------------------------------------------- |
-| start URL `http://localhost:3200/signup`       | `await page.goto(new URL("/signup", BASE_URL).toString());`                   |
-| `click` on button "Create account"             | `await page.getByRole("button", { name: "Create account", exact: true }).click();` |
-| `type` into a labelled field                   | `await page.getByLabel("Email", { exact: true }).fill("…");`                  |
-| `select` an option                             | `await page.getByLabel("Quantity for Trail mug", { exact: true }).selectOption("3");` |
-| `assert` text visible                          | `await expect(page.getByText("Welcome, Ada")).toBeVisible();`                 |
-| `assert` URL matches `/cart`                   | `await expect(page).toHaveURL(/\/cart/);`                                     |
-| `assert` input value                           | `await expect(page.getByLabel("Email", { exact: true })).toHaveValue("…");`   |
+| Recorded step                            | Exported code                                                                         |
+| ---------------------------------------- | ------------------------------------------------------------------------------------- |
+| start URL `http://localhost:3200/signup` | `await page.goto(new URL("/signup", BASE_URL).toString());`                           |
+| `click` on button "Create account"       | `await page.getByRole("button", { name: "Create account", exact: true }).click();`    |
+| `type` into a labelled field             | `await page.getByLabel("Email", { exact: true }).fill("…");`                          |
+| `select` an option                       | `await page.getByLabel("Quantity for Trail mug", { exact: true }).selectOption("3");` |
+| `assert` text visible                    | `await expect(page.getByText("Welcome, Ada")).toBeVisible();`                         |
+| `assert` URL matches `/cart`             | `await expect(page).toHaveURL(/\/cart/);`                                             |
+| `assert` input value                     | `await expect(page.getByLabel("Email", { exact: true })).toHaveValue("…");`           |
 
 Details that make the output replayable:
 
@@ -216,13 +216,13 @@ tests:
     tags: [cart]
 ```
 
-| Command                                  | What it does                                                                     |
-| ---------------------------------------- | -------------------------------------------------------------------------------- |
-| `qa-pilot run "<instruction>" --url <u>` | One test. `--export [file]` writes a spec after a pass.                          |
+| Command                                  | What it does                                                                       |
+| ---------------------------------------- | ---------------------------------------------------------------------------------- |
+| `qa-pilot run "<instruction>" --url <u>` | One test. `--export [file]` writes a spec after a pass.                            |
 | `qa-pilot suite <file.yaml>`             | Every test in the file. `--base-url`, `--tag`, `--max-suite-cost`, `--export-dir`. |
-| `qa-pilot export <run-dir>`              | Spec from a passing run. `--out`, `--name`, `--force`.                           |
-| `qa-pilot heal <spec> --url <u>`         | Repair broken locators; diff only unless `--write`.                              |
-| `qa-pilot github-comment`                | Used by the Action to build and post the PR comment.                             |
+| `qa-pilot export <run-dir>`              | Spec from a passing run. `--out`, `--name`, `--force`.                             |
+| `qa-pilot heal <spec> --url <u>`         | Repair broken locators; diff only unless `--write`.                                |
+| `qa-pilot github-comment`                | Used by the Action to build and post the PR comment.                               |
 
 Shared flags: `--provider anthropic|gemini`, `--model`, `--effort low|medium|high|xhigh|max` (Anthropic),
 `--max-steps`, `--max-cost`, `--action-timeout`, `--timeout`, `--retries`, `--headed`, `--no-video`. A suite writes
@@ -276,16 +276,16 @@ spec replay on every push.
 
 ## Limits and cost
 
-| Limit                  | Default | Flag / suite key                    |
-| ---------------------- | ------- | ----------------------------------- |
-| Steps per run          | 25      | `--max-steps` / `maxSteps`          |
-| Cost per run           | $1.00   | `--max-cost` / `maxCostUsd`         |
-| Cost per suite         | none    | `--max-suite-cost`                  |
-| Per-action timeout     | 10 s    | `--action-timeout` / `actionTimeoutMs` |
-| Whole-run timeout      | 300 s   | `--timeout` / `runTimeoutMs`        |
-| Model call retries     | 3       | `--retries`                         |
-| Action retries         | 2       | (transient Playwright errors only)  |
-| Consecutive errors     | 3       | (then the run stops)                |
+| Limit              | Default | Flag / suite key                       |
+| ------------------ | ------- | -------------------------------------- |
+| Steps per run      | 25      | `--max-steps` / `maxSteps`             |
+| Cost per run       | $1.00   | `--max-cost` / `maxCostUsd`            |
+| Cost per suite     | none    | `--max-suite-cost`                     |
+| Per-action timeout | 10 s    | `--action-timeout` / `actionTimeoutMs` |
+| Whole-run timeout  | 300 s   | `--timeout` / `runTimeoutMs`           |
+| Model call retries | 3       | `--retries`                            |
+| Action retries     | 2       | (transient Playwright errors only)     |
+| Consecutive errors | 3       | (then the run stops)                   |
 
 Cost is computed from each response's token usage and a price table in
 [`src/llm/pricing.ts`](packages/qa-pilot/src/llm/pricing.ts) (Claude Opus 5.5: $4 / $20 per million input / output
@@ -312,13 +312,13 @@ are read at request time, so one build serves every mode. The page never reveals
 All numbers below come from real runs on 2026-11-11 (UTC). Raw outputs, including every `run.json`, are in
 [docs/live-runs](docs/live-runs), and [docs/live-results.md](docs/live-results.md) has the details.
 
-| Run                                                      | Result                                         | Model calls | Tokens in / out | Cost  | Time        |
-| -------------------------------------------------------- | ---------------------------------------------- | ----------- | --------------- | ----- | ----------- |
-| Sample suite, Claude Opus 5.5, bugs **on**               | 3 of 5 as expected; both seeded bugs caught    | 22          | 70,404 / 3,385  | $0.35 | 1 min 54 s  |
-| Sample suite, Claude Opus 5.5, bugs **off**              | 5 of 5 passed; 5 specs exported                | 24          | 76,881 / 3,786  | $0.38 | 1 min 46 s  |
-| Exported specs, plain Playwright, bugs off               | 5 of 5 passed                                  | 0           | none            | $0    | 2.2 s       |
-| Exported specs, plain Playwright, bugs on                | 3 passed, 2 failed (the two bug tests)         | 0           | none            | $0    | 13.2 s      |
-| Heal of the renamed button, Claude Opus 5.5              | healed 1 locator; healed spec passed           | 1           | not recorded    | $0.0078 | n/a         |
+| Run                                         | Result                                      | Model calls | Tokens in / out | Cost    | Time       |
+| ------------------------------------------- | ------------------------------------------- | ----------- | --------------- | ------- | ---------- |
+| Sample suite, Claude Opus 5.5, bugs **on**  | 3 of 5 as expected; both seeded bugs caught | 22          | 70,404 / 3,385  | $0.35   | 1 min 54 s |
+| Sample suite, Claude Opus 5.5, bugs **off** | 5 of 5 passed; 5 specs exported             | 24          | 76,881 / 3,786  | $0.38   | 1 min 46 s |
+| Exported specs, plain Playwright, bugs off  | 5 of 5 passed                               | 0           | none            | $0      | 2.2 s      |
+| Exported specs, plain Playwright, bugs on   | 3 passed, 2 failed (the two bug tests)      | 0           | none            | $0      | 13.2 s     |
+| Heal of the renamed button, Claude Opus 5.5 | healed 1 locator; healed spec passed        | 1           | not recorded    | $0.0078 | n/a        |
 
 Claude ran at the default effort (`medium`), which averaged about $0.016 per step on this shop. A development run of
 the same suite with `gemini-3.5-flash-lite` (free tier, $0.04 at list price) is in the raw data too. It caught both
