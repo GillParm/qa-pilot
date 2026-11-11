@@ -33,6 +33,8 @@ export function whatHappened(result: TestResult): string {
 export interface SuiteMarkdownOptions {
   /** Heading level for the title (default 3). */
   level?: number;
+  /** Heading text (default "qa-pilot: <suite name>"). */
+  title?: string;
   /** Extra text appended to each test's "what happened" cell (links, screenshot names). */
   extra?: (result: TestResult) => string | undefined;
 }
@@ -46,7 +48,7 @@ export function renderSuiteMarkdown(
   const t = summary.totals;
   const steps = summary.results.reduce((sum, r) => sum + r.steps, 0);
   const lines = [
-    `${hashes} qa-pilot: ${cell(summary.name, 80)}`,
+    `${hashes} ${opts.title ?? `qa-pilot: ${cell(summary.name, 80)}`}`,
     "",
     `**${headline(summary)}** ${t.passed} passed, ${t.failed} failed${t.errors ? `, ${t.errors} stopped` : ""}${t.skipped ? `, ${t.skipped} skipped` : ""}. Model ${summary.model}, ${steps} steps, ${formatUsd(t.costUsd)}, ${formatDuration(summary.durationMs)}.`,
     "",
