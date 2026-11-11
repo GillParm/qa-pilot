@@ -75,6 +75,46 @@ async function withRetries<T>(retries: number, fn: () => Promise<T>): Promise<T>
 export async function settle(page: Page, timeoutMs = 2_000): Promise<void> {
   await page.waitForLoadState("domcontentloaded", { timeout: timeoutMs }).catch(() => {});
   await page.waitForLoadState("networkidle", { timeout: timeoutMs }).catch(() => {});
+  // Client-side navigation and streamed content do not fire load events, so
+  // also wait until the DOM stops changing.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      await waitForQuietDom(page, 400, timeoutMs + 1_000);
+      return;
+    } catch {
+      // The page navigated mid-wait; let it load and try once more.
+      await page.waitForLoadState("domcontentloaded", { timeout: timeoutMs }).catch(() => {});
+    }
+  }
+}
+
+/** Resolves once the DOM has had no mutations for `quietMs`, or after `maxMs`. */
+export function waitForQuietDom(page: Page, quietMs: number, maxMs: number): Promise<void> {
+  return page.evaluate(
+    ({ quietMs, maxMs }) =>
+      new Promise<void>((resolve) => {
+        let quiet: ReturnType<typeof setTimeout>;
+        const finish = () => {
+          observer.disconnect();
+          clearTimeout(quiet);
+          clearTimeout(cap);
+          resolve();
+        };
+        const observer = new MutationObserver(() => {
+          clearTimeout(quiet);
+          quiet = setTimeout(finish, quietMs);
+        });
+        observer.observe(document, {
+          subtree: true,
+          childList: true,
+          attributes: true,
+          characterData: true,
+        });
+        quiet = setTimeout(finish, quietMs);
+        const cap = setTimeout(finish, maxMs);
+      }),
+    { quietMs, maxMs },
+  );
 }
 
 async function poll(timeoutMs: number, check: () => Promise<boolean>): Promise<boolean> {
@@ -127,6 +167,7 @@ export async function performAction(
         await withRetries(opts.actionRetries, () =>
           toLocator(page, action.locator).fill(action.text, { timeout }),
         );
+        await settle(page);
         return { outcome: "ok", action };
       case "select":
         await withRetries(opts.actionRetries, () =>

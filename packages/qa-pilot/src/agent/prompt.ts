@@ -18,6 +18,7 @@ Testing:
 - Assert exact, specific facts. Copy text from the snapshot, or compute what the instruction implies (for example three items at $18.00 should total $54.00). Prefer short, distinctive substrings.
 - A failed assertion ends the test as failed. When the app is wrong, that is the correct result: do not work around a bug or change your expectation to match what the app shows.
 - If an action fails, read the error and try another way, such as a different element.
+- If the page is still loading, assert what you expect to appear: assertions wait for it, up to the action timeout.
 - If the app clearly cannot do what the instruction asks (an error message, a missing feature), call done with status fail and say what went wrong.
 - When a value must be new on every run (an email for a new account, a username), put the run token in it, for example ada+<run token>@example.com.
 - Write intent like a test step title, in a few words. Keep reasoning to one or two sentences.`;

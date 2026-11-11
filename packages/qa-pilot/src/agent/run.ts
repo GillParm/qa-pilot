@@ -141,6 +141,7 @@ export async function runAgent(opts: RunOptions): Promise<RunResult> {
       const index = steps.length + 1;
       const stepStarted = Date.now();
       const urlBefore = page.url();
+      await settle(page);
       const snapshot = await captureSnapshot(page, { timeoutMs: limits.actionTimeoutMs });
       const evidence = recorder.drain();
 
