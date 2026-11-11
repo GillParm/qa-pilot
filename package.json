@@ -8,7 +8,8 @@
     "node": ">=24"
   },
   "workspaces": [
-    "packages/qa-pilot"
+    "packages/qa-pilot",
+    "demo-shop"
   ],
   "scripts": {
     "build": "npm run build -w qa-pilot",
