@@ -41,3 +41,30 @@ jobs:
       - uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  integration:
+    name: Demo shop and integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - run: npm run lint -w demo-shop
+      - run: npm run typecheck -w demo-shop
+      - run: npm run build -w demo-shop
+      - name: Integration tests (fake provider, real browser, demo shop)
+        run: npm run test:integration -w qa-pilot
+      - name: Replay the exported example specs with the bugs off
+        run: |
+          DEMO_BUGS=off nohup npm run start -w demo-shop > "$RUNNER_TEMP/demo-shop.log" 2>&1 &
+          for i in $(seq 1 60); do curl -sf http://localhost:3200/ > /dev/null && break; sleep 1; done
+          npx playwright test -c examples/playwright.config.ts
+      - name: Show the demo shop log on failure
+        if: failure()
+        run: cat "$RUNNER_TEMP/demo-shop.log" || true
