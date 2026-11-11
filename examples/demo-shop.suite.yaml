@@ -1,0 +1,47 @@
+# Sample suite for the Tin & Ember demo shop (demo-shop/).
+#
+# With the seeded bugs on (the default), "Order total follows the quantity" and
+# "Sign-up accepts an email with a plus sign" fail, so the suite exits 1.
+# With DEMO_BUGS=off every test passes.
+#
+#   npm run start -w demo-shop                 # bugs on, port 3200
+#   npx qa-pilot suite examples/demo-shop.suite.yaml
+name: Tin & Ember demo shop
+baseUrl: http://localhost:3200
+limits:
+  maxSteps: 15
+  maxCostUsd: 0.75
+
+tests:
+  - name: Product page shows the price
+    path: /
+    instruction: >-
+      From the product list, open the Trail mug product page and check that it shows the price $18.00.
+    tags: [catalogue, smoke]
+
+  - name: Adding to the cart updates the cart count
+    path: /products/trail-mug
+    instruction: >-
+      Add the trail mug to the cart and check that the cart link in the header now shows 1 item.
+    tags: [cart, smoke]
+
+  - name: Order total follows the quantity
+    path: /products/trail-mug
+    instruction: >-
+      Add the trail mug ($18.00) to the cart, open the cart, change its quantity to 3 and check that the
+      order total is $54.00.
+    tags: [cart]
+
+  - name: Sign-up accepts an email with a plus sign
+    path: /signup
+    instruction: >-
+      Sign up as Ada with a new email address that contains a plus sign, such as ada+something@example.com,
+      and a password of at least 8 characters. Check that the welcome message for Ada appears.
+    tags: [signup]
+
+  - name: Sign-up rejects a malformed email
+    path: /signup
+    instruction: >-
+      Try to sign up as Ada with the email address "not-an-email" and a password of at least 8 characters.
+      Check that an error about the email address is shown.
+    tags: [signup]
