@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "name": "Tin & Ember demo shop",
+  "suiteFile": "examples/demo-shop.suite.yaml",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "baseUrl": "http://localhost:3200",
+  "startedAt": "2026-11-11T00:36:46.290Z",
+  "finishedAt": "2026-11-11T00:39:48.932Z",
+  "durationMs": 182642,
+  "results": [
+    {
+      "name": "Product page shows the price",
+      "instruction": "From the product list, open the Trail mug product page and check that it shows the price $18.00.",
+      "tags": [
+        "catalogue",
+        "smoke"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Opened the Trail mug product page from the product list and verified the price is $18.00.",
+      "runDir": "20261111-003646-product-page-shows-the-price",
+      "steps": 4,
+      "costUsd": 0.0034295000000000003,
+      "durationMs": 49653
+    },
+    {
+      "name": "Adding to the cart updates the cart count",
+      "instruction": "Add the trail mug to the cart and check that the cart link in the header now shows 1 item.",
+      "tags": [
+        "cart",
+        "smoke"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/products/trail-mug",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Added the trail mug to the cart and verified the cart link in the header shows 1 item.",
+      "runDir": "20261111-003736-adding-to-the-cart-updates-the-cart-count",
+      "steps": 5,
+      "costUsd": 0.0040978,
+      "durationMs": 21395
+    },
+    {
+      "name": "Order total follows the quantity",
+      "instruction": "Add the trail mug ($18.00) to the cart, open the cart, change its quantity to 3 and check that the order total is $54.00.",
+      "tags": [
+        "cart"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/products/trail-mug",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Trail mug added to cart, quantity changed to 3, and order total verified as $54.00.",
+      "runDir": "20261111-003757-order-total-follows-the-quantity",
+      "steps": 6,
+      "costUsd": 0.0048647,
+      "durationMs": 31627
+    },
+    {
+      "name": "Sign-up accepts an email with a plus sign",
+      "instruction": "Sign up as Ada with a new email address that contains a plus sign, such as ada+something@example.com, and a password of at least 8 characters. Check that the welcome message for Ada appears.",
+      "tags": [
+        "signup"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/signup",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Signed up as Ada with ada+qaa3e9c2@example.com and verified the welcome message.",
+      "runDir": "20261111-003829-sign-up-accepts-an-email-with-a-plus-sign",
+      "steps": 7,
+      "costUsd": 0.005549,
+      "durationMs": 53728
+    },
+    {
+      "name": "Sign-up rejects a malformed email",
+      "instruction": "Try to sign up as Ada with the email address \"not-an-email\" and a password of at least 8 characters. Check that an error about the email address is shown.",
+      "tags": [
+        "signup"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3200/signup",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Tried to sign up with invalid email 'not-an-email', verified that the email error message 'Enter a valid email address.' is shown.",
+      "runDir": "20261111-003922-sign-up-rejects-a-malformed-email",
+      "steps": 6,
+      "costUsd": 0.0048045,
+      "durationMs": 26058
+    }
+  ],
+  "totals": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "asExpected": 5,
+    "unexpected": 0,
+    "costUsd": 0.0227455
+  },
+  "ok": true
+}

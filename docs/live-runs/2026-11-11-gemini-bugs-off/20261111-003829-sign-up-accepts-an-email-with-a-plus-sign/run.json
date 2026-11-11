@@ -1,0 +1,315 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-003829-sign-up-accepts-an-email-with-a-plus-sign",
+  "name": "Sign-up accepts an email with a plus sign",
+  "instruction": "Sign up as Ada with a new email address that contains a plus sign, such as ada+something@example.com, and a password of at least 8 characters. Check that the welcome message for Ada appears.",
+  "startUrl": "http://localhost:3200/signup",
+  "runToken": "qaa3e9c2",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "startedAt": "2026-11-11T00:38:29.114Z",
+  "finishedAt": "2026-11-11T00:39:22.842Z",
+  "durationMs": 53728,
+  "verdict": "pass",
+  "summary": "Signed up as Ada with ada+qaa3e9c2@example.com and verified the welcome message.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Enter name Ada",
+      "reasoning": "Fill in the Name field with Ada as instructed.",
+      "proposed": {
+        "type": "type",
+        "ref": "e15",
+        "text": "Ada"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Name",
+          "exact": true
+        },
+        "text": "Ada"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Name"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:38:30.172Z",
+      "durationMs": 3016,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2033,
+        "outputTokens": 46,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007249,
+        "attempts": 1,
+        "latencyMs": 2157
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Type email address with plus sign",
+      "reasoning": "We need to sign up as Ada with a new email address containing a plus sign as requested by the instruction.",
+      "proposed": {
+        "type": "type",
+        "ref": "e18",
+        "text": "ada+qaa3e9c2@example.com"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Email",
+          "exact": true
+        },
+        "text": "ada+qaa3e9c2@example.com"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Email"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:38:33.188Z",
+      "durationMs": 8000,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2040,
+        "outputTokens": 73,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007945000000000001,
+        "attempts": 1,
+        "latencyMs": 7135
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Type password into Password field",
+      "reasoning": "The instruction asks to sign up with a password of at least 8 characters. We have already filled in Name and Email.",
+      "proposed": {
+        "type": "type",
+        "ref": "e21",
+        "text": "password123"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Password",
+          "exact": true
+        },
+        "text": "password123"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Password"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:38:41.188Z",
+      "durationMs": 9069,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2082,
+        "outputTokens": 66,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007896,
+        "attempts": 1,
+        "latencyMs": 8211
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Click Create account button",
+      "reasoning": "The form is filled out with Name, Email (containing + and run token), and Password (at least 8 characters). Now we need to submit the form to sign up.",
+      "proposed": {
+        "type": "click",
+        "ref": "e24"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Create account",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Create account"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:38:50.257Z",
+      "durationMs": 6770,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2106,
+        "outputTokens": 67,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007993,
+        "attempts": 1,
+        "latencyMs": 5908
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 5,
+      "intent": "Check that the welcome message for Ada appears",
+      "reasoning": "The instruction asks to check that the welcome message for Ada appears, and the region Welcome, Ada is visible in the snapshot.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Welcome, Ada"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Welcome, Ada",
+        "locator": {
+          "kind": "text",
+          "text": "Welcome, Ada"
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/05.png",
+      "startedAt": "2026-11-11T00:38:57.027Z",
+      "durationMs": 7917,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2093,
+        "outputTokens": 68,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007978999999999999,
+        "attempts": 1,
+        "latencyMs": 7494
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 6,
+      "intent": "Verify welcome message for Ada appears",
+      "reasoning": "The instruction asks us to check that the welcome message for Ada appears, which is already verified by step 5 and visible in the current snapshot.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Welcome, Ada"
+      },
+      "outcome": "error",
+      "error": "repeats the assertion that passed at step 5",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "startedAt": "2026-11-11T00:39:04.944Z",
+      "durationMs": 7107,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2106,
+        "outputTokens": 70,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008068,
+        "attempts": 1,
+        "latencyMs": 6700
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 7,
+      "intent": "Complete the test successfully",
+      "reasoning": "The account has been created successfully and the welcome message for Ada has been verified.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Signed up as Ada with ada+qaa3e9c2@example.com and verified the welcome message."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Signed up as Ada with ada+qaa3e9c2@example.com and verified the welcome message."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3200/signup",
+      "urlAfter": "http://localhost:3200/signup",
+      "screenshot": "steps/07.png",
+      "startedAt": "2026-11-11T00:39:12.051Z",
+      "durationMs": 10785,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2170,
+        "outputTokens": 74,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.000836,
+        "attempts": 1,
+        "latencyMs": 10365
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 7,
+    "llmCalls": 7,
+    "inputTokens": 14630,
+    "outputTokens": 464,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.005549
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

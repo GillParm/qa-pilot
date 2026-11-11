@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-003449-adding-to-the-cart-updates-the-cart-count",
+  "name": "Adding to the cart updates the cart count",
+  "instruction": "Add the trail mug to the cart and check that the cart link in the header now shows 1 item.",
+  "startUrl": "http://localhost:3201/products/trail-mug",
+  "runToken": "qa6b076d",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "startedAt": "2026-11-11T00:34:49.793Z",
+  "finishedAt": "2026-11-11T00:35:05.775Z",
+  "durationMs": 15982,
+  "verdict": "pass",
+  "summary": "Successfully added the trail mug to the cart and verified the cart link shows 1 item.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Add the trail mug to the cart",
+      "reasoning": "The trail mug product page is open, and we need to click the 'Add to cart' button.",
+      "proposed": {
+        "type": "click",
+        "ref": "e23"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Add to cart",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Add to cart"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/products/trail-mug",
+      "urlAfter": "http://localhost:3201/products/trail-mug",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:34:50.856Z",
+      "durationMs": 1793,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2098,
+        "outputTokens": 55,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007669,
+        "attempts": 1,
+        "latencyMs": 927
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Check that cart link in the header shows 1 item",
+      "reasoning": "The instruction asks to check that the cart link in the header now shows 1 item.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Cart (1)"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Cart (1)",
+        "locator": {
+          "kind": "text",
+          "text": "Cart (1)"
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/products/trail-mug",
+      "urlAfter": "http://localhost:3201/products/trail-mug",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:34:52.649Z",
+      "durationMs": 2016,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2117,
+        "outputTokens": 65,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007976,
+        "attempts": 1,
+        "latencyMs": 1591
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Check that the cart link in the header shows 1 item",
+      "reasoning": "The instruction asks us to check that the cart link in the header now shows 1 item.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Cart (1)"
+      },
+      "outcome": "error",
+      "error": "repeats the assertion that passed at step 2",
+      "urlBefore": "http://localhost:3201/products/trail-mug",
+      "urlAfter": "http://localhost:3201/products/trail-mug",
+      "startedAt": "2026-11-11T00:34:54.665Z",
+      "durationMs": 7392,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2130,
+        "outputTokens": 67,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008064999999999999,
+        "attempts": 2,
+        "latencyMs": 6986
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Finish test successfully",
+      "reasoning": "The trail mug has been added to the cart, and the cart link in the header correctly shows 1 item (Cart (1)). All requirements of the instruction are verified.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Successfully added the trail mug to the cart and verified the cart link shows 1 item."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Successfully added the trail mug to the cart and verified the cart link shows 1 item."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/products/trail-mug",
+      "urlAfter": "http://localhost:3201/products/trail-mug",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:35:02.057Z",
+      "durationMs": 3715,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2194,
+        "outputTokens": 86,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008732,
+        "attempts": 1,
+        "latencyMs": 3290
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 4,
+    "llmCalls": 4,
+    "inputTokens": 8539,
+    "outputTokens": 273,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0032442
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-003529-sign-up-accepts-an-email-with-a-plus-sign",
+  "name": "Sign-up accepts an email with a plus sign",
+  "instruction": "Sign up as Ada with a new email address that contains a plus sign, such as ada+something@example.com, and a password of at least 8 characters. Check that the welcome message for Ada appears.",
+  "startUrl": "http://localhost:3201/signup",
+  "runToken": "qa7bce1e",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "startedAt": "2026-11-11T00:35:29.214Z",
+  "finishedAt": "2026-11-11T00:36:10.160Z",
+  "durationMs": 40946,
+  "verdict": "fail",
+  "summary": "The app rejects email addresses containing a plus sign (e.g. ada+qa7bce1e@example.com) as invalid, failing the requirement.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Enter Name Ada",
+      "reasoning": "Type Ada into the Name input field.",
+      "proposed": {
+        "type": "type",
+        "ref": "e15",
+        "text": "Ada"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Name",
+          "exact": true
+        },
+        "text": "Ada"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Name"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:35:30.239Z",
+      "durationMs": 1751,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2032,
+        "outputTokens": 44,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007195999999999999,
+        "attempts": 1,
+        "latencyMs": 883
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Type email address with plus sign",
+      "reasoning": "We need to sign up as Ada with a new email address containing a plus sign (e.g., ada+qa7bce1e@example.com).",
+      "proposed": {
+        "type": "type",
+        "ref": "e18",
+        "text": "ada+qa7bce1e@example.com"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Email",
+          "exact": true
+        },
+        "text": "ada+qa7bce1e@example.com"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Email"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:35:31.990Z",
+      "durationMs": 8232,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2039,
+        "outputTokens": 84,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008217,
+        "attempts": 1,
+        "latencyMs": 7384
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Type password into Password textbox",
+      "reasoning": "We need a password of at least 8 characters to sign up.",
+      "proposed": {
+        "type": "type",
+        "ref": "e21",
+        "text": "password123"
+      },
+      "action": {
+        "type": "type",
+        "locator": {
+          "kind": "label",
+          "text": "Password",
+          "exact": true
+        },
+        "text": "password123"
+      },
+      "target": {
+        "role": "textbox",
+        "name": "Password"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/03.png",
+      "startedAt": "2026-11-11T00:35:40.222Z",
+      "durationMs": 19117,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2079,
+        "outputTokens": 55,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007612,
+        "attempts": 3,
+        "latencyMs": 18253
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Click Create account button",
+      "reasoning": "The form is filled out with Name, Email (containing +), and Password (8+ characters). Now we need to submit the sign up form.",
+      "proposed": {
+        "type": "click",
+        "ref": "e24"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "button",
+          "name": "Create account",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "button",
+        "name": "Create account"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:35:59.340Z",
+      "durationMs": 1781,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2103,
+        "outputTokens": 61,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0007834000000000001,
+        "attempts": 1,
+        "latencyMs": 906
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 5,
+      "intent": "Check that email error message is visible",
+      "reasoning": "The app rejected the email address containing a plus sign with an invalid email error message, so we must record this failure according to the instructions.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Enter a valid email address."
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "Enter a valid email address.",
+        "locator": {
+          "kind": "text",
+          "text": "Enter a valid email address."
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/05.png",
+      "startedAt": "2026-11-11T00:36:01.121Z",
+      "durationMs": 1451,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2127,
+        "outputTokens": 73,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008206,
+        "attempts": 1,
+        "latencyMs": 1015
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 6,
+      "intent": "Fail due to invalid email error for plus sign email",
+      "reasoning": "The application rejected an email address containing a plus sign with 'Enter a valid email address.', which prevents signing up with the requested email format.",
+      "proposed": {
+        "type": "done",
+        "status": "fail",
+        "summary": "The app rejects email addresses containing a plus sign (e.g. ada+qa7bce1e@example.com) as invalid, failing the requirement."
+      },
+      "action": {
+        "type": "done",
+        "status": "fail",
+        "summary": "The app rejects email addresses containing a plus sign (e.g. ada+qa7bce1e@example.com) as invalid, failing the requirement."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/signup",
+      "urlAfter": "http://localhost:3201/signup",
+      "screenshot": "steps/06.png",
+      "startedAt": "2026-11-11T00:36:02.572Z",
+      "durationMs": 7581,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2142,
+        "outputTokens": 102,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008976,
+        "attempts": 1,
+        "latencyMs": 7155
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 6,
+    "llmCalls": 6,
+    "inputTokens": 12522,
+    "outputTokens": 419,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0048041
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "name": "Tin & Ember demo shop",
+  "suiteFile": "examples/demo-shop.suite.yaml",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "baseUrl": "http://localhost:3201",
+  "startedAt": "2026-11-11T00:34:30.417Z",
+  "finishedAt": "2026-11-11T00:36:45.188Z",
+  "durationMs": 134771,
+  "results": [
+    {
+      "name": "Product page shows the price",
+      "instruction": "From the product list, open the Trail mug product page and check that it shows the price $18.00.",
+      "tags": [
+        "catalogue",
+        "smoke"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3201/",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Successfully navigated to Trail mug product page and verified the price $18.00.",
+      "runDir": "20261111-003430-product-page-shows-the-price",
+      "steps": 4,
+      "costUsd": 0.0034431999999999996,
+      "durationMs": 19112
+    },
+    {
+      "name": "Adding to the cart updates the cart count",
+      "instruction": "Add the trail mug to the cart and check that the cart link in the header now shows 1 item.",
+      "tags": [
+        "cart",
+        "smoke"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3201/products/trail-mug",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Successfully added the trail mug to the cart and verified the cart link shows 1 item.",
+      "runDir": "20261111-003449-adding-to-the-cart-updates-the-cart-count",
+      "steps": 4,
+      "costUsd": 0.0032442,
+      "durationMs": 15982
+    },
+    {
+      "name": "Order total follows the quantity",
+      "instruction": "Add the trail mug ($18.00) to the cart, open the cart, change its quantity to 3 and check that the order total is $54.00.",
+      "tags": [
+        "cart"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3201/products/trail-mug",
+      "verdict": "fail",
+      "asExpected": false,
+      "summary": "Assertion failed at step 4 (Check that order total is $54.00): text \"$54.00\" was not visible within 10s",
+      "runDir": "20261111-003505-order-total-follows-the-quantity",
+      "steps": 4,
+      "costUsd": 0.0031593999999999997,
+      "durationMs": 23431,
+      "failedStep": {
+        "index": 4,
+        "intent": "Check that order total is $54.00",
+        "error": "text \"$54.00\" was not visible within 10s",
+        "screenshot": "steps/04.png"
+      }
+    },
+    {
+      "name": "Sign-up accepts an email with a plus sign",
+      "instruction": "Sign up as Ada with a new email address that contains a plus sign, such as ada+something@example.com, and a password of at least 8 characters. Check that the welcome message for Ada appears.",
+      "tags": [
+        "signup"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3201/signup",
+      "verdict": "fail",
+      "asExpected": false,
+      "summary": "The app rejects email addresses containing a plus sign (e.g. ada+qa7bce1e@example.com) as invalid, failing the requirement.",
+      "runDir": "20261111-003529-sign-up-accepts-an-email-with-a-plus-sign",
+      "steps": 6,
+      "costUsd": 0.0048041,
+      "durationMs": 40946
+    },
+    {
+      "name": "Sign-up rejects a malformed email",
+      "instruction": "Try to sign up as Ada with the email address \"not-an-email\" and a password of at least 8 characters. Check that an error about the email address is shown.",
+      "tags": [
+        "signup"
+      ],
+      "expect": "pass",
+      "startUrl": "http://localhost:3201/signup",
+      "verdict": "pass",
+      "asExpected": true,
+      "summary": "Successfully tested signup with an invalid email address and verified the error message is displayed.",
+      "runDir": "20261111-003610-sign-up-rejects-a-malformed-email",
+      "steps": 6,
+      "costUsd": 0.0047708,
+      "durationMs": 34997
+    }
+  ],
+  "totals": {
+    "tests": 5,
+    "passed": 3,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 0,
+    "asExpected": 3,
+    "unexpected": 2,
+    "costUsd": 0.0194217
+  },
+  "ok": false
+}

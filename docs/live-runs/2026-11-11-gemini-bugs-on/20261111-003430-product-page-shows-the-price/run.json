@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "id": "20261111-003430-product-page-shows-the-price",
+  "name": "Product page shows the price",
+  "instruction": "From the product list, open the Trail mug product page and check that it shows the price $18.00.",
+  "startUrl": "http://localhost:3201/",
+  "runToken": "qa1db3e7",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "startedAt": "2026-11-11T00:34:30.649Z",
+  "finishedAt": "2026-11-11T00:34:49.761Z",
+  "durationMs": 19112,
+  "verdict": "pass",
+  "summary": "Successfully navigated to Trail mug product page and verified the price $18.00.",
+  "steps": [
+    {
+      "index": 1,
+      "intent": "Open Trail mug product page",
+      "reasoning": "Click the 'Trail mug' link in the product list to open its product page.",
+      "proposed": {
+        "type": "click",
+        "ref": "e19"
+      },
+      "action": {
+        "type": "click",
+        "locator": {
+          "kind": "role",
+          "role": "link",
+          "name": "Trail mug",
+          "exact": true
+        }
+      },
+      "target": {
+        "role": "link",
+        "name": "Trail mug"
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/",
+      "urlAfter": "http://localhost:3201/products/trail-mug",
+      "screenshot": "steps/01.png",
+      "startedAt": "2026-11-11T00:34:31.969Z",
+      "durationMs": 2179,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2445,
+        "outputTokens": 49,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.000856,
+        "attempts": 1,
+        "latencyMs": 1238
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 2,
+      "intent": "Check that the product page shows the price $18.00",
+      "reasoning": "The instruction requires checking that the Trail mug product page shows the price $18.00.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$18.00"
+      },
+      "action": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$18.00",
+        "locator": {
+          "kind": "text",
+          "text": "$18.00",
+          "nth": 0
+        }
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/products/trail-mug",
+      "urlAfter": "http://localhost:3201/products/trail-mug",
+      "screenshot": "steps/02.png",
+      "startedAt": "2026-11-11T00:34:34.148Z",
+      "durationMs": 7234,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2101,
+        "outputTokens": 72,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008103,
+        "attempts": 1,
+        "latencyMs": 6805
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 3,
+      "intent": "Verify the price $18.00 is visible on the product page",
+      "reasoning": "The instruction asks to check that it shows the price $18.00 on the Trail mug product page, which we have already asserted in step 2 but let's confirm or finish up. Wait, step 2 already passed. Let's finish the test successfully with done.",
+      "proposed": {
+        "type": "assert",
+        "kind": "text_visible",
+        "text": "$18.00"
+      },
+      "outcome": "error",
+      "error": "repeats the assertion that passed at step 2",
+      "urlBefore": "http://localhost:3201/products/trail-mug",
+      "urlAfter": "http://localhost:3201/products/trail-mug",
+      "startedAt": "2026-11-11T00:34:41.383Z",
+      "durationMs": 1295,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2116,
+        "outputTokens": 112,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0009147999999999999,
+        "attempts": 1,
+        "latencyMs": 889
+      },
+      "console": [],
+      "network": []
+    },
+    {
+      "index": 4,
+      "intent": "Finish test after checking Trail mug price",
+      "reasoning": "We have opened the Trail mug product page from the product list and checked that it shows the price $18.00 as requested.",
+      "proposed": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Successfully navigated to Trail mug product page and verified the price $18.00."
+      },
+      "action": {
+        "type": "done",
+        "status": "pass",
+        "summary": "Successfully navigated to Trail mug product page and verified the price $18.00."
+      },
+      "outcome": "ok",
+      "urlBefore": "http://localhost:3201/products/trail-mug",
+      "urlAfter": "http://localhost:3201/products/trail-mug",
+      "screenshot": "steps/04.png",
+      "startedAt": "2026-11-11T00:34:42.678Z",
+      "durationMs": 7077,
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "inputTokens": 2182,
+        "outputTokens": 83,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "costUsd": 0.0008621,
+        "attempts": 1,
+        "latencyMs": 6650
+      },
+      "console": [],
+      "network": []
+    }
+  ],
+  "totals": {
+    "steps": 4,
+    "llmCalls": 4,
+    "inputTokens": 8844,
+    "outputTokens": 316,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "costUsd": 0.0034431999999999996
+  },
+  "limits": {
+    "maxSteps": 15,
+    "maxCostUsd": 0.75,
+    "actionTimeoutMs": 10000,
+    "runTimeoutMs": 300000,
+    "llmRetries": 3,
+    "actionRetries": 2,
+    "maxConsecutiveErrors": 3
+  },
+  "console": [],
+  "network": [],
+  "environment": {
+    "qaPilotVersion": "0.1.0",
+    "playwrightVersion": "1.65.0",
+    "browser": "chromium",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "headless": true
+  }
+}
